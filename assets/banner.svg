@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="256" viewBox="0 0 860 256" role="img" aria-labelledby="title desc">
+  <title id="title">김진솔</title>
+  <desc id="desc">jinsol.git · 배운 것을 코드로, 기록으로.</desc>
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#A9B996" />
+    </pattern>
+    <clipPath id="card">
+      <rect x="1" y="1" width="858" height="254" rx="22" />
+    </clipPath>
+  </defs>
+
+  <rect x="1" y="1" width="858" height="254" rx="22" fill="#F9F6EB" stroke="#D9DDC9" stroke-width="2" />
+  <g clip-path="url(#card)">
+    <path d="M544 256C518 203 533 147 583 97S694 35 706 0h154v256Z" fill="#E3EAD4" />
+    <path d="M566 256C548 209 570 154 615 119S715 52 735 0h125v256Z" fill="url(#dots)" opacity=".72" />
+    <circle cx="689" cy="129" r="94" fill="#F3F4E5" stroke="#C3D1AC" stroke-width="1.5" />
+    <circle cx="689" cy="129" r="72" fill="none" stroke="#B9C9A3" stroke-width="1.5" stroke-dasharray="1 6" stroke-linecap="round" />
+
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M670 181v-66q0-24 25-24h33" stroke="#31563A" stroke-width="6" />
+      <path d="M670 143c0-18-9-30-22-39l-13-9" stroke="#6E875C" stroke-width="5" />
+      <path d="M690 145h19c17 0 25-9 25-23" stroke="#A4B689" stroke-width="3" />
+    </g>
+    <g stroke-width="4">
+      <circle cx="670" cy="182" r="9" fill="#F3F4E5" stroke="#31563A" />
+      <circle cx="630" cy="91" r="8" fill="#DEE8CA" stroke="#6E875C" />
+      <circle cx="733" cy="91" r="10" fill="#31563A" stroke="#F3F4E5" />
+      <circle cx="734" cy="120" r="5" fill="#A4B689" />
+      <circle cx="686" cy="145" r="5" fill="#A4B689" />
+    </g>
+    <path d="M773 59h18m-9-9v18M591 169h12m-6-6v12" stroke="#6E875C" stroke-width="2" stroke-linecap="round" />
+  </g>
+
+  <g fill="#31563A" font-family="Consolas, Menlo, monospace">
+    <text x="50" y="63" font-size="21" font-weight="700" letter-spacing="1">$ jinsol.git</text>
+  </g>
+  <g fill="#1A3621" font-family="Pretendard, 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans CJK KR', sans-serif">
+    <text x="46" y="154" font-size="80" font-weight="800" letter-spacing="-4">김진솔</text>
+    <text x="51" y="207" fill="#405941" font-size="27" font-weight="600" letter-spacing="-.4">배운 것을 코드로, 기록으로.</text>
+  </g>
+</svg>

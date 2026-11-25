@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="366" height="105" viewBox="0 0 366 105" role="img" aria-labelledby="title desc">
+  <title id="title">PS Log</title>
+  <desc id="desc">코딩테스트 기록과 복습 일정</desc>
+  <rect x="1" y="1" width="364" height="103" rx="15" fill="#EAF0DF" stroke="#D3DDC3" stroke-width="2" />
+  <rect x="20" y="23" width="59" height="59" rx="15" fill="#D5E2C5" />
+  <g fill="none" stroke="#31563A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="35" y="41" width="29" height="26" rx="4" />
+    <path d="M42 37v8m15-8v8M35 49h29m-20 9 4 4 7-8" />
+    <path d="M324 60l12-12m-10 0h10v10" />
+  </g>
+  <text x="95" y="48" fill="#1A3621" font-family="Consolas, Menlo, monospace" font-size="22" font-weight="700">PS Log</text>
+  <text x="95" y="75" fill="#405941" font-family="Pretendard, 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans CJK KR', sans-serif" font-size="16">코딩테스트 기록과 복습 일정</text>
+</svg>
