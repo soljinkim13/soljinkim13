@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="192" viewBox="0 0 900 192" role="img" aria-labelledby="title">
+<title id="title">Jinsol Kim · 백엔드 개발</title>
+<defs><clipPath id="frame"><rect width="900" height="192" rx="12"/></clipPath></defs>
+<g clip-path="url(#frame)"><rect width="900" height="192" fill="#201D24"/>
+<g fill="none" stroke-width="2"><path d="M493 49 C595 151 624 -108 735 55 S870 165 936 35" stroke="#EFE1CF"/>
+<path d="M493 55 C595 154 624 -101 735 59 S870 158 936 40" stroke="#977ACB"/>
+<path d="M493 61 C595 157 624 -94 735 63 S870 151 936 45" stroke="#695783"/>
+<path d="M493 67 C595 160 624 -87 735 67 S870 144 936 50" stroke="#977ACB"/>
+<path d="M493 73 C595 163 624 -80 735 71 S870 137 936 55" stroke="#695783"/>
+<path d="M493 79 C595 166 624 -73 735 75 S870 130 936 60" stroke="#EFE1CF"/>
+<path d="M493 85 C595 169 624 -66 735 79 S870 123 936 65" stroke="#695783"/>
+<path d="M493 91 C595 172 624 -59 735 83 S870 116 936 70" stroke="#977ACB"/>
+<path d="M493 97 C595 175 624 -52 735 87 S870 109 936 75" stroke="#695783"/>
+<path d="M493 103 C595 178 624 -45 735 91 S870 102 936 80" stroke="#977ACB"/>
+<path d="M493 109 C595 181 624 -38 735 95 S870 95 936 85" stroke="#EFE1CF"/>
+<path d="M493 115 C595 184 624 -31 735 99 S870 88 936 90" stroke="#977ACB"/>
+<path d="M493 121 C595 187 624 -24 735 103 S870 81 936 95" stroke="#695783"/>
+<path d="M493 127 C595 190 624 -17 735 107 S870 74 936 100" stroke="#977ACB"/>
+<path d="M493 133 C595 193 624 -10 735 111 S870 67 936 105" stroke="#695783"/>
+<path d="M493 139 C595 196 624 -3 735 115 S870 60 936 110" stroke="#EFE1CF"/>
+<path d="M493 145 C595 199 624 4 735 119 S870 53 936 115" stroke="#695783"/>
+<path d="M493 151 C595 202 624 11 735 123 S870 46 936 120" stroke="#977ACB"/>
+<path d="M493 157 C595 205 624 18 735 127 S870 39 936 125" stroke="#695783"/>
+<path d="M493 163 C595 208 624 25 735 131 S870 32 936 130" stroke="#977ACB"/>
+<path d="M493 169 C595 211 624 32 735 135 S870 25 936 135" stroke="#EFE1CF"/></g>
+<text x="42" y="103" fill="#F7F0E8" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="79" font-weight="700" letter-spacing="-3">Jinsol Kim</text>
+<text x="46" y="150" fill="#D6C9EF" font-family="Malgun Gothic,Apple SD Gothic Neo,sans-serif" font-size="25">김진솔  /  백엔드 개발</text></g></svg>
