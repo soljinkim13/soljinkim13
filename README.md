@@ -31,9 +31,11 @@
 
 [편집기 열기 ↗](https://phone-maker.vercel.app/editor/)
 
-### KIC AI 에이전트 공모전
+### KIC 사건 대응 리밸런싱 AI Agent
 
-**서비스 공동 기획**　|　팀 4상 최고가
+**서비스 공동 기획**　|　팀 4상 최고가 · KIC AI 에이전트 공모전
+
+<img src="./assets/kic-concept.svg" width="760" alt="사건 당일 자료 검색 → 유사 위기·반례 비교 → 판단 근거 검증" />
 
 ## 기술 스택
 
