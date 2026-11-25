@@ -4,11 +4,11 @@
 
 ## 대표 프로젝트 · KKIRI
 
-<img align="right" src="./assets/kkiri.webp" width="120" alt="KKIRI의 차콜·오렌지 무전기 로고 시안" />
+**여러 대의 Pleos 차량과 동승자를 한 일행으로 연결하는 앱**
 
-**여러 차의 운전자와 동승자를 한 채널로 연결하는 차량용 무전 앱**
+현대자동차그룹 Pleos 앱 개발 공모전 · 팀 OKKIKKI · PM
 
-현대자동차 Pleos 앱 개발 공모전 · 팀 OKKIKKI · PM
+[프로젝트 저장소 ↗](https://github.com/OKKIKKI/KKIRI)
 
 <img src="https://img.shields.io/badge/Kotlin-2B2421?style=flat-square&amp;logo=kotlin&amp;logoColor=FF9B53" alt="Kotlin" />
 <img src="https://img.shields.io/badge/TypeScript-2B2421?style=flat-square&amp;logo=typescript&amp;logoColor=FF9B53" alt="TypeScript" />
