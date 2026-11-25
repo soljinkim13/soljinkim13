@@ -4,16 +4,17 @@
 
 ## 대표 프로젝트 · KKIRI
 
+<img align="right" src="./assets/kkiri.png" width="124" height="124" alt="KKIRI 앱 아이콘. 나란히 달리는 두 대의 차가 ‘ㄲ’을 이룬다." />
+
 **여러 대의 Pleos 차량과 동승자를 한 일행으로 연결하는 앱**
 
 현대자동차그룹 Pleos 앱 개발 공모전 · 팀 OKKIKKI · PM
 
-[프로젝트 저장소 ↗](https://github.com/OKKIKKI/KKIRI)
+[프로젝트 저장소 ↗](https://github.com/OKKIKKI/KKIRI) · [시연 영상 ↗](https://drive.google.com/file/d/1t39sDGqGukPX4RKMDjvrmnzsNmc4bFDK/view?usp=drivesdk)
 
-<img src="https://img.shields.io/badge/Kotlin-2B2421?style=flat-square&amp;logo=kotlin&amp;logoColor=FF9B53" alt="Kotlin" />
-<img src="https://img.shields.io/badge/TypeScript-2B2421?style=flat-square&amp;logo=typescript&amp;logoColor=FF9B53" alt="TypeScript" />
-<img src="https://img.shields.io/badge/Node.js-2B2421?style=flat-square&amp;logo=nodedotjs&amp;logoColor=FF9B53" alt="Node.js" />
-<img src="https://img.shields.io/badge/React-2B2421?style=flat-square&amp;logo=react&amp;logoColor=FF9B53" alt="React" />
+<img src="https://img.shields.io/badge/Kotlin-1B1719?style=flat-square&amp;logo=kotlin&amp;logoColor=A07FE6" alt="Kotlin" />
+<img src="https://img.shields.io/badge/React-1B1719?style=flat-square&amp;logo=react&amp;logoColor=A07FE6" alt="React" />
+<img src="https://img.shields.io/badge/Node.js-1B1719?style=flat-square&amp;logo=nodedotjs&amp;logoColor=A07FE6" alt="Node.js" />
 
 <br clear="right" />
 
@@ -29,6 +30,6 @@
 <details>
 <summary>GitHub 활동</summary>
 
-<p><img src="https://streak-stats.demolab.com/?user=soljinkim13&amp;hide_border=true&amp;background=231D1A&amp;ring=FF9B53&amp;fire=FF9B53&amp;currStreakNum=FFF2DF&amp;currStreakLabel=FF9B53&amp;sideNums=FFF2DF&amp;sideLabels=FFF2DF&amp;dates=D1B8A3&amp;stroke=8B6E58&amp;border_radius=8&amp;disable_animations=true" alt="GitHub 기여 수와 연속 기여 기록" /></p>
+<p><img src="https://streak-stats.demolab.com/?user=soljinkim13&amp;hide_border=true&amp;background=1B1719&amp;ring=A07FE6&amp;fire=A07FE6&amp;currStreakNum=F2E4D0&amp;currStreakLabel=A07FE6&amp;sideNums=F2E4D0&amp;sideLabels=F2E4D0&amp;dates=D3C4D3&amp;stroke=8060BE&amp;border_radius=8&amp;disable_animations=true" alt="GitHub 기여 수와 연속 기여 기록" /></p>
 
 </details>
