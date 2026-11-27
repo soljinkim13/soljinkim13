@@ -251,75 +251,28 @@ def hero(T):
 
 # ---------------------------------------------------------------- 구역 제목
 def section(key, T):
-    tag, title, sub = D.SECTIONS[key]
-    W, H = 900, 104
-    s, tw = name_tag(0, 14, tag, T, 25, 26, 50)
-    b = [s, text(title, tw + 22, 48, "b", 25, T["text"])[0],
-         text(sub, 0, 96, "b", 16, T["green"])[0]]
+    tag, title = D.SECTIONS[key]
+    W, H = 900, 64
+    s, tw = name_tag(0, 8, tag, T, 22, 22, 44)
+    b = [s, text(title, tw + 20, 38, "b", 22, T["text"])[0]]
     return svg(W, H, "".join(b), f"{tag} {title}")
 
 
-# ---------------------------------------------------------------- 대표 프로젝트
-def featured(p, idx, T):
-    W, H = 900, 176
-    acc = T["orangeText"] if p.get("orange") else T["green"]
-    X = 52
-    b = [text(f"{idx:02d}", 0, 36, "mb", 16, acc)[0]]
-    s, tw = name_tag(X, 10, p["name"], T, 20, 16, 38)
-    b.append(s)
-    s, dw = text(p["desc"], X + tw + 16, 36, "b", 19, T["text"])
-    b.append(s)
-    pw = width(p["period"], "m", 13)
-    if X + tw + 16 + dw > W - pw - 20:
-        print(f"경고: {p['name']} 설명이 기간과 겹침")
-    b.append(text(p["period"], W, 35, "m", 13, T["muted"], anchor="end")[0])
-    # 담당
-    y = 66
-    b.append(feather("user", X, y + 3, 18, T["sub"]))
-    b.append(text("담당", X + 26, y + 18, "b", 14, T["sub"])[0])
-    s, cw = chip(X + 70, y, p["role"], T)
-    b.append(s)
-    b.append(text(p["team"], X + 70 + cw + 14, y + 18, "b", 14, T["text"])[0])
-    # 기술
-    y = 122
-    b.append(feather("code", X, y - 15, 18, T["sub"]))
-    b.append(text("기술", X + 26, y, "b", 14, T["sub"])[0])
-    b.append(tech_row(X + 70, y, p["tech"], T)[0])
-    # 결과
-    y = 158
-    b.append(feather("check-circle", X, y - 15, 18, acc))
-    b.append(text("결과", X + 26, y, "b", 14, acc)[0])
-    b.append(highlight(X + 70, y, p["result"], T, 14.5, p.get("orange")))
-    techs = ", ".join(parse_tech(t)[1] for t in p["tech"])
-    return svg(W, H, "".join(b),
-               f'{p["name"]}: {p["desc"]}. 담당 {p["role"]} ({p["team"]}). 기술 {techs}. 결과 {"".join(p["result"])}')
+# ---------------------------------------------------------------- 버튼과 아이콘 (README 글 사이에 넣는 작은 그림)
+def button(label, fill, h=24, size=13):
+    """모서리 없는 버튼. 라이트·다크 모두 같은 그림을 쓴다."""
+    w = width(label, "b", size) + 22
+    body = (f'<rect width="{_fmt(w)}" height="{h}" fill="{fill}"/>'
+            + text(label, 11, h / 2 + size * 0.36, "b", size, "#FFFFFF")[0])
+    return svg(round(w), h, body, label)
 
 
-# ---------------------------------------------------------------- 그 밖의 프로젝트 (한 줄 목록)
-def more_list(T, start):
-    W = 900
-    rh = 46
-    H = rh * len(D.MORE)
-    b = []
-    for i, p in enumerate(D.MORE):
-        y = i * rh + 28
-        b.append(text(f"{start + i:02d}", 0, y, "mb", 13.5, T["green"])[0])
-        s, nw = text(p["name"], 52, y, "b", 16.5, T["text"])
-        b.append(s)
-        s, dw = text(p["desc"], 52 + nw + 12, y, "r", 14.5, T["sub"])
-        b.append(s)
-        # 오른쪽: 기술 아이콘(작게) + 팀
-        team_w = width(p["team"], "r", 13)
-        b.append(text(p["team"], W, y, "r", 13, T["muted"], anchor="end")[0])
-        row, _ = tech_row(0, 0, p["tech"], T, size=13, isz=14, gap=14, face="r", color=T["sub"])
-        _, end = tech_row(0, 0, p["tech"], T, size=13, isz=14, gap=14, face="r", color=T["sub"])
-        tx = 470
-        if 52 + nw + 12 + dw > tx - 16 or tx + end > W - team_w - 24:
-            print(f"경고: {p['name']} 줄이 겹침")
-        b.append(tech_row(tx, y, p["tech"], T, size=13, isz=14, gap=14, face="r", color=T["sub"])[0])
-    alt = "그 밖의 프로젝트: " + "; ".join(
-        f'{p["name"]}({p["desc"]}, {p["team"]}, {", ".join(parse_tech(t)[1] for t in p["tech"])})' for p in D.MORE)
-    return svg(W, H, "".join(b), alt)
+def icon_file(slug):
+    """기술 아이콘 한 개. 라이트·다크 어디서도 묻히는 색(아주 어둡거나 밝은 색)은 회색으로."""
+    c = "#" + ICONS[slug]["hex"]
+    if _contrast(c, "#FFFFFF") < 1.9 or _contrast(c, "#0D1117") < 1.9:
+        c = "#8B949E"
+    return svg(24, 24, f'<path fill="{c}" d="{ICONS[slug]["path"]}"/>', ICONS[slug]["title"])
 
 
 # ---------------------------------------------------------------- 기술 스택
@@ -360,8 +313,38 @@ def _pic(name, alt, w="100%", link=None):
 
 
 def _sec(k):
-    tag, title, _ = D.SECTIONS[k]
+    tag, title = D.SECTIONS[k]
     return "<p>" + _pic(f"section-{k}", f"{tag} {title}") + "</p>"
+
+
+def _techs(techs):
+    out = []
+    for t in techs:
+        slug, label = parse_tech(t)
+        img = f'<img src="./assets/icons/{slug}.svg" height="14" alt=""> ' if slug else ""
+        out.append(img + label)
+    return "&nbsp; ".join(out)
+
+
+def _buttons(p, h=20):
+    out = []
+    if p.get("repo"):
+        out.append(f'<a href="{p["repo"]}"><img src="./assets/btn-repo.svg" height="{h}" alt="{p["name"]} 저장소"></a>')
+    if p.get("demo"):
+        out.append(f'<a href="{p["demo"]}"><img src="./assets/btn-demo.svg" height="{h}" alt="{p["name"]} 데모"></a>')
+    return " ".join(out)
+
+
+def _featured(i, p):
+    pre, em, post = p["result"]
+    return (f'<h3>{i:02d}&nbsp; {p["name"]}&nbsp; <sub>{p["desc"]}</sub></h3>\n'
+            f'<p><b>{p["role"]}</b> · {p["team"]} · {p["period"]}&nbsp;&nbsp;｜&nbsp;&nbsp;{_techs(p["tech"])}<br>\n'
+            f'결과 &nbsp;{pre}<b>{em}</b>{post}&nbsp;&nbsp; {_buttons(p, 22)}</p>')
+
+
+def _more(i, p):
+    return f'| {i:02d} | **{p["name"]}**&nbsp; {p["desc"]} | {_techs(p["tech"][:3])} | {_buttons(p, 22)} |'
+
 
 
 def readme():
@@ -370,44 +353,54 @@ def readme():
         "",
         "　".join(f'**{n}** [{t}]({u})' for n, t, u in D.LINKS),
         "",
+        _sec("projects"),
+        "",
+        "\n\n".join(_featured(i, p) for i, p in enumerate(D.FEATURED, 1)),
+        "",
         "<br>",
         "",
-        _sec("projects"),
+        _sec("more"),
+        "",
+        "| | 프로젝트 | 기술 | |\n|:--|:--|:--|:--|\n"
+        + "\n".join(_more(i, p) for i, p in enumerate(D.MORE, len(D.FEATURED) + 1)),
+        "",
+        _sec("stack"),
+        "<p>" + _pic("stack", "기술 스택: " + "; ".join(f'{l} {", ".join(parse_tech(t)[1] for t in it)}' for l, it in D.STACK)) + "</p>",
+        "",
+        _sec("activity"),
+        "<p>" + _pic("activity", "기록과 활동: " + ", ".join(p + e for _, p, e in D.ACTIVITY) + ". 자격: " + ", ".join(D.CERTS)) + "</p>",
+        "",
+        _sec("grass"),
+        '<p><picture><source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-green.svg">'
+        '<img src="./profile-3d-contrib/profile-green.svg" width="100%" alt="최근 1년 커밋 기록을 입체 막대로 그린 잔디"></picture></p>',
+        "",
+        "<!-- 이 파일은 scripts/build.py가 만든다. 내용은 scripts/data.py에서 고치고 python3 scripts/build.py를 실행한다. "
+        "잔디 그림은 .github/workflows/profile-3d.yml이 매일 새로 그린다. -->",
+        "",
     ]
-    for i, p in enumerate(D.FEATURED, 1):
-        techs = ", ".join(parse_tech(t)[1] for t in p["tech"])
-        L.append("<p>" + _pic(f"project-{i:02d}", f'{p["name"]}: {p["desc"]}. 담당 {p["role"]} ({p["team"]}). '
-                                                  f'기술 {techs}. 결과 {"".join(p["result"])}', link=p.get("link")) + "</p>")
-    L += ["", _sec("more"),
-          "<p>" + _pic("more", "그 밖의 프로젝트 " + ", ".join(p["name"] for p in D.MORE)) + "</p>",
-          "", _sec("stack"),
-          "<p>" + _pic("stack", "기술 스택") + "</p>",
-          "", _sec("activity"),
-          "<p>" + _pic("activity", "기록과 활동") + "</p>",
-          "", _sec("grass"),
-          '<p><picture><source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-green.svg">'
-          '<img src="./profile-3d-contrib/profile-green.svg" width="100%" alt="최근 1년 커밋 기록을 입체 막대로 그린 잔디"></picture></p>',
-          "",
-          "<!-- 이 파일은 scripts/build.py가 만든다. 내용은 scripts/data.py에서 고치고 python3 scripts/build.py를 실행한다. "
-          "잔디 그림은 .github/workflows/profile-3d.yml이 매일 새로 그린다. -->",
-          ""]
     open(os.path.join(ROOT, "README.md"), "w", encoding="utf-8").write("\n".join(L))
 
 
 def main():
-    for f in os.listdir(OUT):
-        if f.endswith(".svg"):
-            os.remove(os.path.join(OUT, f))
+    import shutil
+    shutil.rmtree(OUT, ignore_errors=True)
+    os.makedirs(os.path.join(OUT, "icons"))
     made = []
     for theme, T in THEMES.items():
         made.append(save("hero", theme, hero(T)))
         for k in D.SECTIONS:
             made.append(save(f"section-{k}", theme, section(k, T)))
-        for i, p in enumerate(D.FEATURED, 1):
-            made.append(save(f"project-{i:02d}", theme, featured(p, i, T)))
-        made.append(save("more", theme, more_list(T, len(D.FEATURED) + 1)))
         made.append(save("stack", theme, stack(T)))
         made.append(save("activity", theme, activity(T)))
+    for name, label, fill in (("btn-repo", "레포 보기 ↗", "#2F8050"), ("btn-demo", "데모 ↗", "#C2672A")):
+        p = os.path.join(OUT, f"{name}.svg")
+        open(p, "w", encoding="utf-8").write(button(label, fill))
+        made.append(p)
+    slugs = {parse_tech(t)[0] for p in D.FEATURED + D.MORE for t in p["tech"]} - {None}
+    for slug in sorted(slugs):
+        p = os.path.join(OUT, "icons", f"{slug}.svg")
+        open(p, "w", encoding="utf-8").write(icon_file(slug))
+        made.append(p)
     readme()
     total = sum(os.path.getsize(p) for p in made)
     print(f"{len(made)} files, {total / 1024:.0f} KB")
