@@ -2,7 +2,7 @@
 
 **Email** [soljinkim13@gmail.com](mailto:soljinkim13@gmail.com)　**Velog** [velog.io/@tongmill_g](https://velog.io/@tongmill_g/posts)
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/section-projects-dark.svg"><img src="./assets/section-projects-light.svg" width="100%" alt="프로젝트 대표 여섯 가지"></picture></p>
+## 프로젝트 <sub>대표 여섯 가지</sub>
 
 <table>
 <tr>
@@ -59,7 +59,7 @@
 </tr>
 </table>
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/section-more-dark.svg"><img src="./assets/section-more-light.svg" width="100%" alt="그 밖의 프로젝트 만들어 본 열 가지"></picture></p>
+## 그 밖의 프로젝트 <sub>만들어 본 열 가지</sub>
 
 | | 프로젝트 | 기술 | |
 |:--|:--|:--|:--|
@@ -74,13 +74,27 @@
 | 15 | **우리집 식재료**&nbsp; 식재료 관리 PWA | <img src="./assets/icons/vuedotjs.svg" height="14" alt=""> Vue&nbsp; <img src="./assets/icons/typescript.svg" height="14" alt=""> TypeScript&nbsp; <img src="./assets/icons/supabase.svg" height="14" alt=""> Supabase | <a href="https://github.com/soljinkim13/food_manager_plus"><img src="./assets/btn-repo.svg" height="22" alt="우리집 식재료 저장소"></a> |
 | 16 | **Pelican**&nbsp; 영상 제작 자동화 | <img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; <img src="./assets/icons/ffmpeg.svg" height="14" alt=""> FFmpeg&nbsp; Remotion | <a href="https://github.com/soljinkim13/auto-pelican"><img src="./assets/btn-repo.svg" height="22" alt="Pelican 저장소"></a> |
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/section-stack-dark.svg"><img src="./assets/section-stack-light.svg" width="100%" alt="기술 스택 프로젝트에서 직접 쓴 기술"></picture></p>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/stack-dark.svg"><img src="./assets/stack-light.svg" width="100%" alt="기술 스택: 언어 Java, Python, TypeScript, JavaScript, Kotlin; 서버 Spring, FastAPI, Node.js, WebSocket, MyBatis; 데이터 MySQL, SQLite, Supabase, ChromaDB; AI LangGraph, OpenAI, Claude, ElevenLabs; 화면 React, Vue, Compose; 도구 Git, GitHub, FFmpeg, Vercel"></picture></p>
+## 기술 스택 <sub>프로젝트에서 직접 쓴 기술</sub>
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/section-activity-dark.svg"><img src="./assets/section-activity-light.svg" width="100%" alt="기록과 활동 배운 것을 글과 발표로"></picture></p>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/activity-dark.svg"><img src="./assets/activity-light.svg" width="100%" alt="기록과 활동: Velog 기술 글 23편, 알고리즘 풀이 167커밋, 스터디 발표 3회, JavaScript 스터디 리더. 자격: 정보처리기사 필기, ADsP, OPIc IH, HSK 6급, SSAFY 역량테스트 A형"></picture></p>
+| | |
+|:--|:--|
+| **언어** | <img src="./assets/icons/openjdk.svg" height="14" alt=""> Java&nbsp; <img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; <img src="./assets/icons/typescript.svg" height="14" alt=""> TypeScript&nbsp; <img src="./assets/icons/javascript.svg" height="14" alt=""> JavaScript&nbsp; <img src="./assets/icons/kotlin.svg" height="14" alt=""> Kotlin |
+| **서버** | <img src="./assets/icons/spring.svg" height="14" alt=""> Spring&nbsp; <img src="./assets/icons/fastapi.svg" height="14" alt=""> FastAPI&nbsp; <img src="./assets/icons/nodedotjs.svg" height="14" alt=""> Node.js&nbsp; WebSocket&nbsp; MyBatis |
+| **데이터** | <img src="./assets/icons/mysql.svg" height="14" alt=""> MySQL&nbsp; <img src="./assets/icons/sqlite.svg" height="14" alt=""> SQLite&nbsp; <img src="./assets/icons/supabase.svg" height="14" alt=""> Supabase&nbsp; ChromaDB |
+| **AI** | <img src="./assets/icons/langchain.svg" height="14" alt=""> LangGraph&nbsp; <img src="./assets/icons/openai.svg" height="14" alt=""> OpenAI&nbsp; <img src="./assets/icons/claude.svg" height="14" alt=""> Claude&nbsp; <img src="./assets/icons/elevenlabs.svg" height="14" alt=""> ElevenLabs |
+| **화면** | <img src="./assets/icons/react.svg" height="14" alt=""> React&nbsp; <img src="./assets/icons/vuedotjs.svg" height="14" alt=""> Vue&nbsp; <img src="./assets/icons/jetpackcompose.svg" height="14" alt=""> Compose |
+| **도구** | <img src="./assets/icons/git.svg" height="14" alt=""> Git&nbsp; <img src="./assets/icons/github.svg" height="14" alt=""> GitHub&nbsp; <img src="./assets/icons/ffmpeg.svg" height="14" alt=""> FFmpeg&nbsp; <img src="./assets/icons/vercel.svg" height="14" alt=""> Vercel |
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/section-grass-dark.svg"><img src="./assets/section-grass-light.svg" width="100%" alt="커밋 기록 최근 1년"></picture></p>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-green.svg"><img src="./profile-3d-contrib/profile-green.svg" width="100%" alt="최근 1년 커밋 기록을 입체 막대로 그린 잔디"></picture></p>
+## 기록과 활동 <sub>배운 것을 글과 발표로</sub>
+
+- Velog 기술 글 **23편**
+- 알고리즘 풀이 **167커밋**
+- 스터디 발표 **3회**
+- JavaScript 스터디 **리더**
+- 자격 &nbsp;정보처리기사 필기 · ADsP · OPIc IH · HSK 6급 · SSAFY 역량테스트 A형
+
+## 커밋 기록 <sub>최근 1년</sub>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-green.svg"><img src="./profile-3d-contrib/profile-green.svg" width="100%" alt="최근 1년 커밋 기록을 입체 막대로 그린 잔디"></picture>
 
 <!-- 이 파일은 scripts/build.py가 만든다. 내용은 scripts/data.py에서 고치고 python3 scripts/build.py를 실행한다. 잔디 그림은 .github/workflows/profile-3d.yml이 매일 새로 그린다. -->

@@ -14,6 +14,9 @@ LOG = [
     ("e91f5d3", "feat: 백엔드 · SSAFY 16기", "green"),
 ]
 
+# 표지 오른쪽 그래프: main에서 갈라졌다 다시 합쳐지는 갈래
+BRANCHES = ["소프트웨어공학", "통역 · 번역", "영상 편집", "3D 데이터"]
+
 # 표지 아래 연락처: (이름, 보이는 글자, 주소)
 LINKS = [
     ("Email", "soljinkim13@gmail.com", "mailto:soljinkim13@gmail.com"),
