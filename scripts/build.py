@@ -36,8 +36,9 @@ F = {
     "r": Font("SpoqaHanSansNeo-Regular.otf"),
     "mb": Font("JetBrainsMono-Bold.ttf"),
     "m": Font("JetBrainsMono-Regular.ttf"),
+    "k": Font("Pretendard-Black.ttf"),
 }
-FALLBACK = {"b": ["mb", "r"], "r": ["m", "b"], "mb": ["b", "m"], "m": ["r", "mb"]}
+FALLBACK = {"b": ["mb", "r"], "r": ["m", "b"], "mb": ["b", "m"], "m": ["r", "mb"], "k": ["b", "mb"]}
 
 
 def _fmt(v):
@@ -92,26 +93,21 @@ def wrap(s, face, size, maxw):
     lines.append(cur)
     return lines
 
-
-# ---------------------------------------------------------------- 색
+# ---------------------------------------------------------------- 색 (포트폴리오 Git 버전과 같은 팔레트)
 THEMES = {
     "light": dict(
-        bg="#FFFFFF", card="#F5F9F6", card2="#EEF5F0", line="#DCE8DF",
-        text="#1F2328", sub="#57606A", muted="#8B949E",
-        green="#2F8050", green2="#6DAA7C", greenSoft="#E2F0E5", onGreen="#FFFFFF",
-        orange="#D9752F", orangeSoft="#FCEBDD", pill="#FFFFFF",
-        lanes=["#2F8050", "#6DAA7C", "#E0823D", "#7FA8C9"],
-        heroA="#F3F9F4", heroB="#E3F0E7",
+        bg="#FFFFFF", text="#1F2328", sub="#57606A", muted="#8B949E", line="#DADDE1",
+        green="#2F8050", green2="#6DAA7C", tag="#E2F0E5", hl="#DDEFE0", chip="#2F8050", onChip="#FFFFFF",
+        orange="#E0823D", orangeText="#C2672A", orangeHl="#FCEBDD", gray="#8B949E",
     ),
     "dark": dict(
-        bg="#0D1117", card="#121C17", card2="#17241D", line="#253A2D",
-        text="#E6EDF3", sub="#A3ADB8", muted="#6E7781",
-        green="#7CC48F", green2="#4F9463", greenSoft="#1B3324", onGreen="#0D1117",
-        orange="#F0A061", orangeSoft="#3A2617", pill="#0F1713",
-        lanes=["#7CC48F", "#4F9463", "#F0A061", "#8DB6D6"],
-        heroA="#0F1A14", heroB="#132A1C",
+        bg="#0D1117", text="#E6EDF3", sub="#A3ADB8", muted="#7D8590", line="#30363D",
+        green="#7CC48F", green2="#A9D1B1", tag="#1B3324", hl="#1F3A29", chip="#3E9160", onChip="#FFFFFF",
+        orange="#F0A061", orangeText="#F0A061", orangeHl="#3A2617", gray="#7D8590",
     ),
 }
+
+FEATHER = json.load(open(os.path.join(HERE, "feather.json"), encoding="utf-8"))
 
 
 def _lum(hexc):
@@ -126,24 +122,28 @@ def _contrast(a, b):
     return (la + 0.05) / (lb + 0.05)
 
 
-def icon_color(slug, T, against):
-    c = "#" + ICONS[slug]["hex"]
-    return c if _contrast(c, against) >= 1.9 else T["text"]
-
-
 def parse_tech(t):
     """'python' / 'langchain:LangGraph' / '=WebSocket' → (아이콘 슬러그 또는 None, 이름)"""
     if t.startswith("="):
         return None, t[1:]
     if ":" in t:
-        slug, label = t.split(":", 1)
-        return slug, label
+        return tuple(t.split(":", 1))
     return t, ICONS[t]["title"]
 
 
+def brand(slug, T):
+    c = "#" + ICONS[slug]["hex"]
+    return c if _contrast(c, T["bg"]) >= 1.9 else T["text"]
+
+
 def icon(slug, x, y, size, color):
-    s = size / 24
-    return f'<path transform="translate({_fmt(x)} {_fmt(y)}) scale({s:.4f})" fill="{color}" d="{ICONS[slug]["path"]}"/>'
+    return (f'<path transform="translate({_fmt(x)} {_fmt(y)}) scale({size / 24:.4f})" fill="{color}" '
+            f'd="{ICONS[slug]["path"]}"/>')
+
+
+def feather(name, x, y, size, color, sw=2):
+    return (f'<g transform="translate({_fmt(x)} {_fmt(y)}) scale({size / 24:.4f})" fill="none" stroke="{color}" '
+            f'stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round">{FEATHER[name]}</g>')
 
 
 def svg(w, h, body, title):
@@ -158,216 +158,198 @@ def save(name, theme, content):
     return p
 
 
-# ---------------------------------------------------------------- 작은 부품
-def chip(x, y, label, T, kind="fill", h=24, size=12):
-    w = width(label, "b", size) + 20
-    if kind == "fill":
-        bg = f'<rect x="{_fmt(x)}" y="{y}" width="{_fmt(w)}" height="{h}" rx="7" fill="{T["green"]}"/>'
-        t, _ = text(label, x + 10, y + h / 2 + size * 0.36, "b", size, T["onGreen"])
-    else:
-        bg = (f'<rect x="{_fmt(x + .5)}" y="{y + .5}" width="{_fmt(w - 1)}" height="{h - 1}" rx="7" '
-              f'fill="none" stroke="{T["line"]}"/>')
-        t, _ = text(label, x + 10, y + h / 2 + size * 0.36, "b", size, T["sub"])
-    return bg + t, w
-
-
-def pill(x, y, tech, T, h=26):
-    slug, label = parse_tech(tech)
-    size = 11.5
-    tw = width(label, "b", size)
-    pad = 9
-    if slug:
-        w = pad + 14 + 6 + tw + pad
-    else:
-        w = pad + 6 + 6 + tw + pad
-    out = (f'<rect x="{_fmt(x + .5)}" y="{y + .5}" width="{_fmt(w - 1)}" height="{h - 1}" rx="{h / 2 - .5}" '
-           f'fill="{T["pill"]}" stroke="{T["line"]}"/>')
-    if slug:
-        out += icon(slug, x + pad, y + (h - 14) / 2, 14, icon_color(slug, T, T["pill"]))
-        tx = x + pad + 14 + 6
-    else:
-        out += f'<circle cx="{_fmt(x + pad + 3)}" cy="{y + h / 2}" r="3" fill="{T["green2"]}"/>'
-        tx = x + pad + 6 + 6
-    t, _ = text(label, tx, y + h / 2 + size * 0.36, "b", size, T["text"])
-    return out + t, w
-
-
-def pills(x, y, techs, T, maxw, gap=6, h=26):
-    """기술 이름표를 maxw 안에서 줄을 바꿔 가며 놓는다. (svg, 전체 높이)"""
-    out, cx, cy = "", x, y
+def tech_row(x, y, techs, T, size=14, isz=15, gap=18, face="r", color=None):
+    """아이콘 + 이름을 테두리 없이 한 줄로. y는 글자 기준선. 끝 x를 돌려준다."""
+    out = []
     for t in techs:
-        _, w = pill(0, 0, t, T, h)
-        if cx > x and cx + w > x + maxw:
-            cx, cy = x, cy + h + gap
-        s, w = pill(cx, cy, t, T, h)
-        out += s
-        cx += w + gap
-    return out, cy + h - y
+        slug, label = parse_tech(t)
+        if slug:
+            out.append(icon(slug, x, y - isz * 0.82, isz, brand(slug, T)))
+            x += isz + 6
+        else:
+            out.append(f'<rect x="{_fmt(x + isz / 2 - 3)}" y="{_fmt(y - isz * 0.82 + isz / 2 - 3)}" width="6" height="6" fill="{T["green2"]}"/>')
+            x += isz + 6
+        s, w = text(label, x, y, face, size, color or T["text"])
+        out.append(s)
+        x += w + gap
+    return "".join(out), x - gap
+
+
+def highlight(x, y, parts, T, size, orange=False):
+    """(앞, 강조, 뒤): 강조 부분에 옅은 초록 바탕과 굵은 초록 글씨 (포트폴리오의 형광펜 강조)."""
+    pre, em, post = parts
+    out = []
+    s, w = text(pre, x, y, "r", size, T["text"])
+    out.append(s)
+    x += w
+    ew = width(em, "b", size)
+    out.append(f'<rect x="{_fmt(x - 2)}" y="{_fmt(y - size * 0.95)}" width="{_fmt(ew + 4)}" height="{_fmt(size * 1.3)}" '
+               f'fill="{T["orangeHl"] if orange else T["hl"]}"/>')
+    out.append(text(em, x, y, "b", size, T["orangeText"] if orange else T["green"])[0])
+    x += ew
+    out.append(text(post, x, y, "r", size, T["text"])[0])
+    return "".join(out)
+
+
+def name_tag(x, y, label, T, size, padx, h):
+    """옅은 초록 바탕 위의 굵은 이름 (모서리 직각)."""
+    w = width(label, "b", size) + padx * 2
+    return (f'<rect x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(w)}" height="{h}" fill="{T["tag"]}"/>'
+            + text(label, x + padx, y + h / 2 + size * 0.36, "b", size, T["text"])[0]), w
+
+
+def chip(x, y, label, T, size=13, h=26):
+    """진한 초록 바탕의 흰 글씨 (담당 업무 표시)."""
+    w = width(label, "b", size) + 24
+    return (f'<rect x="{_fmt(x)}" y="{y}" width="{_fmt(w)}" height="{h}" fill="{T["chip"]}"/>'
+            + text(label, x + 12, y + h / 2 + size * 0.36, "b", size, T["onChip"])[0]), w
 
 
 # ---------------------------------------------------------------- 표지
-def hero(T, theme):
-    W, H = 900, 300
-    b = [f'<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">'
-         f'<stop offset="0" stop-color="{T["heroA"]}"/><stop offset="1" stop-color="{T["heroB"]}"/></linearGradient>'
-         f'<linearGradient id="em" x1="0" y1="0" x2="1" y2="0">'
-         f'<stop offset="0" stop-color="{T["green"]}"/><stop offset="1" stop-color="{T["lanes"][3]}"/></linearGradient></defs>',
-         f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="22" fill="url(#bg)" stroke="{T["line"]}"/>']
-    x0 = 52
-    b.append(text("~/soljinkim13", x0, 66, "m", 13, T["muted"])[0])
-    b.append(text("(main)", x0 + width("~/soljinkim13 ", "m", 13), 66, "m", 13, T["green"])[0])
-    t, nw = text(D.NAME, x0, 140, "b", 58, T["text"])
+def hero(T):
+    W, H = 900, 330
+    b = [f'<defs><linearGradient id="em" x1="0" y1="0" x2="1" y2="0">'
+         f'<stop offset="0" stop-color="{T["green"]}"/><stop offset="1" stop-color="{T["green2"]}"/></linearGradient></defs>']
+    # 저장소 주소와 탭 (포트폴리오 머리 부분)
+    t, w = text("soljinkim13", 0, 20, "m", 13, T["sub"])
     b.append(t)
-    b.append(text(D.ROLE, x0 + nw + 20, 138, "mb", 19, T["green"])[0])
-    b.append(text(D.NAME_EN, x0 + nw + 20, 112, "m", 13, T["muted"])[0])
-    b.append(text(D.HOOK[0], x0, 196, "r", 23, T["sub"])[0])
-    t, ew = text(D.HOOK[1], x0, 236, "b", 28, "url(#em)")
+    t, w2 = text("  /  ", w, 20, "m", 13, T["muted"])
     b.append(t)
-    b.append(text(D.HOOK[2], x0 + ew, 236, "b", 28, T["text"])[0])
-
-    # 오른쪽: 갈래가 합쳐지는 커밋 그래프
-    gx0, gx1, mx, my = 560, 724, 828, 150
-    lanes = [78, 124, 170, 216]
-    for i, (ly, name) in enumerate(zip(lanes, D.BRANCHES)):
-        c = T["lanes"][i]
-        b.append(f'<path d="M{gx0} {ly} H{gx1} C{gx1 + 52} {ly} {mx - 50} {my} {mx - 14} {my}" '
-                 f'fill="none" stroke="{c}" stroke-width="3" stroke-linecap="round"/>')
-        for k, cx in enumerate((gx0, gx0 + 82, gx1)):
-            b.append(f'<circle cx="{cx}" cy="{ly}" r="{6 if k == 0 else 5}" fill="{T["heroA"] if k else c}" '
-                     f'stroke="{c}" stroke-width="3"/>')
-        b.append(text(name, gx0 + 14, ly - 10, "b", 11.5, T["sub"])[0])
-    b.append(f'<circle cx="{mx}" cy="{my}" r="14" fill="{T["green"]}"/>'
-             f'<circle cx="{mx}" cy="{my}" r="14" fill="none" stroke="{T["green"]}" stroke-width="2">'
-             f'<animate attributeName="r" values="14;26;14" dur="2.6s" repeatCount="indefinite"/>'
-             f'<animate attributeName="opacity" values=".8;0;.8" dur="2.6s" repeatCount="indefinite"/></circle>')
-    b.append(text("backend", mx, my + 40, "mb", 13, T["green"], anchor="middle")[0])
-    b.append(text("HEAD", mx, my - 26, "m", 11, T["muted"], anchor="middle")[0])
-    return svg(W, H, "".join(b), f"{D.NAME} · {D.ROLE} · {' '.join(D.HOOK)}")
+    b.append(text("profile", w + w2, 20, "mb", 13, T["text"])[0])
+    x = 0
+    for i, tab in enumerate(["Overview", "Projects", "Skills", "Activity"]):
+        s, tw = text(tab, x, 50, "b" if i == 0 else "r", 13, T["text"] if i == 0 else T["sub"])
+        b.append(s)
+        if i == 0:
+            b.append(f'<rect x="0" y="59" width="{_fmt(tw + 10)}" height="2.5" fill="{T["green"]}"/>')
+        x += tw + 44
+    b.append(text("$ whoami", 0, 112, "m", 14, T["sub"])[0])
+    b.append(text(D.HOOK[0], 0, 168, "b", 42, T["text"])[0])
+    s, ew = text(D.HOOK[1], 0, 224, "k", 42, "url(#em)")
+    b.append(s)
+    b.append(text(D.HOOK[2], ew, 224, "b", 42, T["text"])[0])
+    s, nw = name_tag(0, 254, D.NAME, T, 23, 26, 46)
+    b.append(s)
+    b.append(text(D.ROLE, nw + 22, 285, "r", 23, T["sub"])[0])
+    # 오른쪽 커밋 기록
+    lx, ly, step = 612, 120, 50
+    n = len(D.LOG)
+    b.append(f'<line x1="{lx}" y1="{ly}" x2="{lx}" y2="{ly + step * (n - 1)}" stroke="{T["line"]}" stroke-width="2"/>')
+    for i, (h, msg, dot) in enumerate(D.LOG):
+        y = ly + i * step
+        last = i == n - 1
+        if dot == "gray":
+            b.append(f'<circle cx="{lx}" cy="{y}" r="6.5" fill="{T["bg"]}" stroke="{T["gray"]}" stroke-width="2"/>')
+        else:
+            b.append(f'<circle cx="{lx}" cy="{y}" r="7" fill="{T["orange"] if dot == "orange" else T["green"]}"/>')
+        s, hw = text(h, lx + 22, y + 4.5, "m", 12, T["muted"])
+        b.append(s)
+        b.append(text(msg, lx + 22 + hw + 12, y + 4.5, "mb" if last else "m", 12, T["text"])[0])
+    b.append(text("HEAD → main", lx + 22, ly + step * (n - 1) + 34, "mb", 11.5, T["green"])[0])
+    return svg(W, H, "".join(b), f"{D.NAME} · {D.ROLE} · {''.join(D.HOOK)}")
 
 
 # ---------------------------------------------------------------- 구역 제목
 def section(key, T):
-    W, H = 900, 64
-    ko, cmd = D.SECTIONS[key]
-    b = [f'<rect x="0" y="22" width="5" height="28" rx="2.5" fill="{T["green"]}"/>']
-    t, w = text(ko, 20, 46, "b", 24, T["text"])
-    b.append(t)
-    b.append(text("$ " + cmd, 20 + w + 16, 45, "m", 13.5, T["muted"])[0])
-    b.append(f'<line x1="{_fmt(20 + w + 16 + width("$ " + cmd, "m", 13.5) + 16)}" y1="40" x2="{W}" y2="40" '
-             f'stroke="{T["line"]}" stroke-dasharray="2 5"/>')
-    return svg(W, H, "".join(b), ko)
+    tag, title, sub = D.SECTIONS[key]
+    W, H = 900, 104
+    s, tw = name_tag(0, 14, tag, T, 25, 26, 50)
+    b = [s, text(title, tw + 22, 48, "b", 25, T["text"])[0],
+         text(sub, 0, 96, "b", 16, T["green"])[0]]
+    return svg(W, H, "".join(b), f"{tag} {title}")
 
 
-# ---------------------------------------------------------------- 걸어온 길
-def journey(T):
-    W, H = 900, 150
-    y = 52
-    xs = [80, 300, 530, 770]
-    b = [f'<line x1="30" y1="{y}" x2="{W - 30}" y2="{y}" stroke="{T["line"]}" stroke-width="3" stroke-linecap="round"/>',
-         f'<line x1="30" y1="{y}" x2="{xs[-1]}" y2="{y}" stroke="{T["green2"]}" stroke-width="3" stroke-linecap="round"/>']
-    for i, (x, (date, title, sub)) in enumerate(zip(xs, D.JOURNEY)):
-        last = i == len(xs) - 1
-        b.append(f'<circle cx="{x}" cy="{y}" r="{10 if last else 8}" fill="{T["green"] if last else T["bg"]}" '
-                 f'stroke="{T["green"]}" stroke-width="3"/>')
-        b.append(text(date, x, y - 24, "mb", 13, T["green"], anchor="middle")[0])
-        b.append(text(title, x, y + 40, "b", 15.5, T["text"], anchor="middle")[0])
-        b.append(text(sub, x, y + 63, "r", 12.5, T["sub"], anchor="middle")[0])
-    s, w = chip(0, 0, "HEAD → now", T, h=22, size=11)
-    b.append(f'<g transform="translate({xs[-1] + 22} {y - 11})">{s}</g>')
-    return svg(W, H, "".join(b), "걸어온 길: " + " → ".join(j[1] for j in D.JOURNEY))
-
-
-# ---------------------------------------------------------------- 프로젝트 카드
-def card(p, idx, T, big, H=None):
-    """프로젝트 카드. H를 주지 않으면 필요한 높이만 돌려준다(같은 줄 카드 높이를 맞추려고)."""
-    W, P = 440, 24
-    acc = T["orange"] if p.get("orange") else T["green"]
-    b = []
-    y = 42
-    t, nw = text(f"{idx:02d}", P, y, "mb", 12.5, acc)
-    b.append(t)
-    b.append(text(p["tag"], P + nw + 10, y, "m", 12, T["muted"], ls=0.6)[0])
-    b.append(text(p["period"], W - P, y, "m", 12, T["muted"], anchor="end")[0])
-    y += 38 if big else 34
-    b.append(text(p["name"], P, y, "b", 26 if big else 21, T["text"])[0])
-    y += 24 if big else 23
-    for line in wrap(p["desc"], "r", 14 if big else 13, W - 2 * P)[:2]:
-        b.append(text(line, P, y, "r", 14 if big else 13, T["sub"])[0])
-        y += 20
-    y += 2
-    s, w = chip(P, y, p["role"], T)
+# ---------------------------------------------------------------- 대표 프로젝트
+def featured(p, idx, T):
+    W, H = 900, 176
+    acc = T["orangeText"] if p.get("orange") else T["green"]
+    X = 52
+    b = [text(f"{idx:02d}", 0, 36, "mb", 16, acc)[0]]
+    s, tw = name_tag(X, 10, p["name"], T, 20, 16, 38)
     b.append(s)
-    s2, _ = chip(P + w + 6, y, p["team"], T, kind="line")
-    b.append(s2)
-    y += 24
-    if big:
-        mv, ml = p["metric"]
-        y += 50
-        t, mw = text(mv, P, y, "b", 34, acc)
-        b.append(t)
-        b.append(text(ml, P + mw + 12, y - 4, "r", 13, T["sub"])[0])
-        y += 8
-    _, ph = pills(0, 0, p["tech"], T, W - 2 * P)
-    need = y + 20 + ph + P
-    if H is None:
-        return need
-    ps, _ = pills(P, H - P - ph, p["tech"], T, W - 2 * P)
-    b.append(ps)
-    frame = (f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="16" fill="{T["card"]}" stroke="{T["line"]}"/>'
-             f'<rect x="0" y="24" width="4" height="{40 if big else 30}" rx="2" fill="{acc}"/>')
-    return svg(W, H, frame + "".join(b), f'{p["name"]}: {p["desc"]} ({p["role"]}, {p["team"]})')
+    s, dw = text(p["desc"], X + tw + 16, 36, "b", 19, T["text"])
+    b.append(s)
+    pw = width(p["period"], "m", 13)
+    if X + tw + 16 + dw > W - pw - 20:
+        print(f"경고: {p['name']} 설명이 기간과 겹침")
+    b.append(text(p["period"], W, 35, "m", 13, T["muted"], anchor="end")[0])
+    # 담당
+    y = 66
+    b.append(feather("user", X, y + 3, 18, T["sub"]))
+    b.append(text("담당", X + 26, y + 18, "b", 14, T["sub"])[0])
+    s, cw = chip(X + 70, y, p["role"], T)
+    b.append(s)
+    b.append(text(p["team"], X + 70 + cw + 14, y + 18, "b", 14, T["text"])[0])
+    # 기술
+    y = 122
+    b.append(feather("code", X, y - 15, 18, T["sub"]))
+    b.append(text("기술", X + 26, y, "b", 14, T["sub"])[0])
+    b.append(tech_row(X + 70, y, p["tech"], T)[0])
+    # 결과
+    y = 158
+    b.append(feather("check-circle", X, y - 15, 18, acc))
+    b.append(text("결과", X + 26, y, "b", 14, acc)[0])
+    b.append(highlight(X + 70, y, p["result"], T, 14.5, p.get("orange")))
+    techs = ", ".join(parse_tech(t)[1] for t in p["tech"])
+    return svg(W, H, "".join(b),
+               f'{p["name"]}: {p["desc"]}. 담당 {p["role"]} ({p["team"]}). 기술 {techs}. 결과 {"".join(p["result"])}')
+
+
+# ---------------------------------------------------------------- 그 밖의 프로젝트 (한 줄 목록)
+def more_list(T, start):
+    W = 900
+    rh = 46
+    H = rh * len(D.MORE)
+    b = []
+    for i, p in enumerate(D.MORE):
+        y = i * rh + 28
+        b.append(text(f"{start + i:02d}", 0, y, "mb", 13.5, T["green"])[0])
+        s, nw = text(p["name"], 52, y, "b", 16.5, T["text"])
+        b.append(s)
+        s, dw = text(p["desc"], 52 + nw + 12, y, "r", 14.5, T["sub"])
+        b.append(s)
+        # 오른쪽: 기술 아이콘(작게) + 팀
+        team_w = width(p["team"], "r", 13)
+        b.append(text(p["team"], W, y, "r", 13, T["muted"], anchor="end")[0])
+        row, _ = tech_row(0, 0, p["tech"], T, size=13, isz=14, gap=14, face="r", color=T["sub"])
+        _, end = tech_row(0, 0, p["tech"], T, size=13, isz=14, gap=14, face="r", color=T["sub"])
+        tx = 470
+        if 52 + nw + 12 + dw > tx - 16 or tx + end > W - team_w - 24:
+            print(f"경고: {p['name']} 줄이 겹침")
+        b.append(tech_row(tx, y, p["tech"], T, size=13, isz=14, gap=14, face="r", color=T["sub"])[0])
+    alt = "그 밖의 프로젝트: " + "; ".join(
+        f'{p["name"]}({p["desc"]}, {p["team"]}, {", ".join(parse_tech(t)[1] for t in p["tech"])})' for p in D.MORE)
+    return svg(W, H, "".join(b), alt)
 
 
 # ---------------------------------------------------------------- 기술 스택
 def stack(T):
     W = 900
-    bw, bh, gap = 438, 150, 24
-    rows = math.ceil(len(D.STACK) / 2)
-    H = rows * bh + (rows - 1) * 16
+    rh = 44
+    H = rh * len(D.STACK)
     b = []
-    for i, (en, ko, items) in enumerate(D.STACK):
-        bx = (i % 2) * (bw + gap)
-        by = (i // 2) * (bh + 16)
-        b.append(f'<rect x="{bx + .5}" y="{by + .5}" width="{bw - 1}" height="{bh - 1}" rx="16" fill="{T["card"]}" stroke="{T["line"]}"/>')
-        t, w = text(ko, bx + 22, by + 34, "b", 16, T["text"])
-        b.append(t)
-        b.append(text(en, bx + 22 + w + 10, by + 33, "m", 11.5, T["green"], ls=0.8)[0])
-        for k, tech in enumerate(items):
-            slug, label = parse_tech(tech)
-            tx = bx + 22 + k * 82
-            ty = by + 52
-            b.append(f'<rect x="{tx + .5}" y="{ty + .5}" width="55" height="55" rx="14" fill="{T["pill"]}" stroke="{T["line"]}"/>')
-            if slug:
-                b.append(icon(slug, tx + 14, ty + 14, 27, icon_color(slug, T, T["pill"])))
-            else:
-                ab = "".join(ch for ch in label if ch.isupper())[:2] or label[:2]
-                b.append(text(ab, tx + 28, ty + 34, "mb", 16, T["green"], anchor="middle")[0])
-            size = 11.5 if width(label, "b", 11.5) <= 78 else 10
-            b.append(text(label, tx + 28, ty + 76, "b", size, T["sub"], anchor="middle")[0])
-    return svg(W, H, "".join(b), "기술 스택: " + ", ".join(parse_tech(t)[1] for _, _, it in D.STACK for t in it))
+    for i, (label, items) in enumerate(D.STACK):
+        y = i * rh + 28
+        b.append(text(label, 0, y, "b", 14, T["sub"])[0])
+        b.append(tech_row(110, y, items, T, size=15, isz=18, gap=30, face="b")[0])
+    return svg(W, H, "".join(b), "기술 스택: " + "; ".join(
+        f'{l} {", ".join(parse_tech(t)[1] for t in it)}' for l, it in D.STACK))
 
 
 # ---------------------------------------------------------------- 기록과 활동
 def activity(T):
     W = 900
-    n = len(D.STATS)
-    gap = 16
-    tw = (W - gap * (n - 1)) / n
-    th = 112
     b = []
-    for i, (v, l) in enumerate(D.STATS):
-        x = i * (tw + gap)
-        b.append(f'<rect x="{_fmt(x + .5)}" y=".5" width="{_fmt(tw - 1)}" height="{th - 1}" rx="16" fill="{T["card"]}" stroke="{T["line"]}"/>')
-        b.append(text(v, x + 22, 58, "b", 34, T["green"])[0])
-        b.append(text(l, x + 22, 88, "r", 13.5, T["sub"])[0])
-    y = th + 18
-    x = 0
-    for c in D.CERTS:
-        s, w = chip(x, y, c, T, kind="line", h=28, size=12.5)
-        b.append(s)
-        x += w + 8
-    H = y + 28
-    return svg(W, H, "".join(b), "기록과 활동: " + ", ".join(f"{l} {v}" for v, l in D.STATS) + " · " + ", ".join(D.CERTS))
+    for i, (ic, pre, em) in enumerate(D.ACTIVITY):
+        x = (i % 2) * 450
+        y = (i // 2) * 44 + 28
+        b.append(feather(ic, x, y - 15, 18, T["green"]))
+        b.append(highlight(x + 30, y, (pre, em, ""), T, 15))
+    y = 2 * 44 + 28
+    b.append(feather("award", 0, y - 15, 18, T["green"]))
+    b.append(text(" · ".join(D.CERTS), 30, y, "r", 15, T["text"])[0])
+    H = y + 14
+    return svg(W, H, "".join(b), "기록과 활동: " + ", ".join(p + e for _, p, e in D.ACTIVITY) + ". 자격: " + ", ".join(D.CERTS))
 
 
 # ---------------------------------------------------------------- README
@@ -378,70 +360,52 @@ def _pic(name, alt, w="100%", link=None):
 
 
 def _sec(k):
-    return "<p>" + _pic(f"section-{k}", D.SECTIONS[k][0]) + "</p>"
-
-
-def _grid(items, start):
-    rows = []
-    for i in range(0, len(items), 2):
-        cells = []
-        for j, p in enumerate(items[i:i + 2]):
-            techs = ", ".join(parse_tech(t)[1] for t in p["tech"])
-            alt = f'{p["name"]}: {p["desc"]}. 역할 {p["role"]} ({p["team"]}). 기술 {techs}'
-            cells.append(_pic(f"project-{start + i + j:02d}", alt, "49%", p.get("link")))
-        rows.append('<p align="center">\n' + "\n".join(cells) + "\n</p>")
-    return "\n".join(rows)
+    tag, title, _ = D.SECTIONS[k]
+    return "<p>" + _pic(f"section-{k}", f"{tag} {title}") + "</p>"
 
 
 def readme():
-    hook = "".join(D.HOOK)
     L = [
-        '<div align="center">',
+        "<p>" + _pic("hero", f"{D.NAME} · {D.ROLE} · {''.join(D.HOOK)}") + "</p>",
         "",
-        _pic("hero", f"{D.NAME} · {D.ROLE} · {hook}"),
+        "　".join(f'**{n}** [{t}]({u})' for n, t, u in D.LINKS),
         "",
-        "".join(f'<a href="{u}"><img src="https://img.shields.io/badge/{b}?style=flat-square&logo={lg}&logoColor=white" alt="{a}"></a> '
-                for a, b, lg, u in D.LINKS).strip(),
-        "",
-        "</div>",
-        "",
-        _sec("journey"),
-        "<p>" + _pic("journey", "걸어온 길: " + " → ".join(f"{d} {t}" for d, t, _ in D.JOURNEY)) + "</p>",
+        "<br>",
         "",
         _sec("projects"),
-        _grid(D.FEATURED, 1),
-        "",
-        _sec("more"),
-        _grid(D.MORE, len(D.FEATURED) + 1),
-        "",
-        _sec("stack"),
-        "<p>" + _pic("stack", "기술 스택: " + ", ".join(parse_tech(t)[1] for _, _, it in D.STACK for t in it)) + "</p>",
-        "",
-        _sec("activity"),
-        "<p>" + _pic("activity", "기록과 활동: " + ", ".join(f"{l} {v}" for v, l in D.STATS)) + "</p>",
-        "",
-        _sec("grass"),
-        '<p><picture><source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-green.svg">'
-        '<img src="./profile-3d-contrib/profile-green-animate.svg" width="100%" alt="최근 1년 커밋 기록을 입체 막대로 그린 잔디"></picture></p>',
-        "",
-        "<!-- 이 파일은 scripts/build.py가 만든다. 내용은 scripts/data.py에서 고치고 python3 scripts/build.py를 실행한다. "
-        "잔디 그림은 .github/workflows/profile-3d.yml이 매일 새로 그린다. -->",
-        "",
     ]
+    for i, p in enumerate(D.FEATURED, 1):
+        techs = ", ".join(parse_tech(t)[1] for t in p["tech"])
+        L.append("<p>" + _pic(f"project-{i:02d}", f'{p["name"]}: {p["desc"]}. 담당 {p["role"]} ({p["team"]}). '
+                                                  f'기술 {techs}. 결과 {"".join(p["result"])}', link=p.get("link")) + "</p>")
+    L += ["", _sec("more"),
+          "<p>" + _pic("more", "그 밖의 프로젝트 " + ", ".join(p["name"] for p in D.MORE)) + "</p>",
+          "", _sec("stack"),
+          "<p>" + _pic("stack", "기술 스택") + "</p>",
+          "", _sec("activity"),
+          "<p>" + _pic("activity", "기록과 활동") + "</p>",
+          "", _sec("grass"),
+          '<p><picture><source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-green.svg">'
+          '<img src="./profile-3d-contrib/profile-green.svg" width="100%" alt="최근 1년 커밋 기록을 입체 막대로 그린 잔디"></picture></p>',
+          "",
+          "<!-- 이 파일은 scripts/build.py가 만든다. 내용은 scripts/data.py에서 고치고 python3 scripts/build.py를 실행한다. "
+          "잔디 그림은 .github/workflows/profile-3d.yml이 매일 새로 그린다. -->",
+          ""]
     open(os.path.join(ROOT, "README.md"), "w", encoding="utf-8").write("\n".join(L))
 
 
 def main():
+    for f in os.listdir(OUT):
+        if f.endswith(".svg"):
+            os.remove(os.path.join(OUT, f))
     made = []
     for theme, T in THEMES.items():
-        made.append(save("hero", theme, hero(T, theme)))
+        made.append(save("hero", theme, hero(T)))
         for k in D.SECTIONS:
             made.append(save(f"section-{k}", theme, section(k, T)))
-        made.append(save("journey", theme, journey(T)))
-        for items, start, big in ((D.FEATURED, 1, True), (D.MORE, len(D.FEATURED) + 1, False)):
-            H = max(card(p, 0, T, big) for p in items)
-            for i, p in enumerate(items, start):
-                made.append(save(f"project-{i:02d}", theme, card(p, i, T, big, H)))
+        for i, p in enumerate(D.FEATURED, 1):
+            made.append(save(f"project-{i:02d}", theme, featured(p, i, T)))
+        made.append(save("more", theme, more_list(T, len(D.FEATURED) + 1)))
         made.append(save("stack", theme, stack(T)))
         made.append(save("activity", theme, activity(T)))
     readme()
