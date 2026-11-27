@@ -63,7 +63,7 @@
 
 | | 프로젝트 | 기술 | |
 |:--|:--|:--|:--|
-| 07 | **폰스토리 메이커**&nbsp; 폰 스토리 편집기 | <img src="./assets/icons/javascript.svg" height="14" alt=""> JavaScript&nbsp; <img src="./assets/icons/html5.svg" height="14" alt=""> HTML5&nbsp; IndexedDB | <a href="https://github.com/soljinkim13/phone-maker"><img src="./assets/btn-repo.svg" height="22" alt="폰스토리 메이커 저장소"></a> <a href="https://phone-maker.vercel.app/editor/"><img src="./assets/btn-demo.svg" height="22" alt="폰스토리 메이커 데모"></a> |
+| 07 | **폰스토리 메이커**&nbsp; 폰 스토리 편집기 | <img src="./assets/icons/javascript.svg" height="14" alt=""> JavaScript&nbsp; <img src="./assets/icons/html5.svg" height="14" alt=""> HTML5&nbsp; IndexedDB | <a href="https://github.com/soljinkim13/phone-maker"><img src="./assets/btn-repo.svg" height="22" alt="폰스토리 메이커 저장소"></a> |
 | 08 | **틈 TEUM**&nbsp; 여행 일정 추천 | <img src="./assets/icons/openjdk.svg" height="14" alt=""> Java&nbsp; <img src="./assets/icons/spring.svg" height="14" alt=""> Spring&nbsp; MyBatis | <a href="https://github.com/soljinkim13/teum-enjoytrip"><img src="./assets/btn-repo.svg" height="22" alt="틈 TEUM 저장소"></a> |
 | 09 | **맛집기행**&nbsp; 맛집 정렬 추천 | <img src="./assets/icons/javascript.svg" height="14" alt=""> JavaScript&nbsp; <img src="./assets/icons/nodedotjs.svg" height="14" alt=""> Node.js&nbsp; <img src="./assets/icons/openjdk.svg" height="14" alt=""> Java | <a href="https://github.com/soljinkim13/matzip-trip"><img src="./assets/btn-repo.svg" height="22" alt="맛집기행 저장소"></a> |
 | 10 | **전기충전행**&nbsp; 충전소 안내 | <img src="./assets/icons/openjdk.svg" height="14" alt=""> Java&nbsp; Swing&nbsp; OpenAPI | <a href="https://github.com/soljinkim13/ev-charge-trip"><img src="./assets/btn-repo.svg" height="22" alt="전기충전행 저장소"></a> |

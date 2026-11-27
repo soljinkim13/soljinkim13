@@ -66,7 +66,7 @@ FEATURED = [
 
 # 그 밖의 프로젝트 (한 줄 목록)
 MORE = [
-    dict(name="폰스토리 메이커", desc="폰 스토리 편집기", team="개인", tech=["javascript", "html5", "=IndexedDB", "vercel"], repo="https://github.com/soljinkim13/phone-maker", demo="https://phone-maker.vercel.app/editor/"),
+    dict(name="폰스토리 메이커", desc="폰 스토리 편집기", team="개인", tech=["javascript", "html5", "=IndexedDB", "vercel"], repo="https://github.com/soljinkim13/phone-maker"),
     dict(name="틈 TEUM", desc="여행 일정 추천", team="SSAFY 관통", tech=["openjdk:Java", "spring", "=MyBatis", "mysql"], repo="https://github.com/soljinkim13/teum-enjoytrip"),
     dict(name="맛집기행", desc="맛집 정렬 추천", team="2인 팀 · 화면", tech=["javascript", "nodedotjs:Node.js", "openjdk:Java", "supabase"], repo="https://github.com/soljinkim13/matzip-trip"),
     dict(name="전기충전행", desc="충전소 안내", team="2인 팀 · 충전소", tech=["openjdk:Java", "=Swing", "=OpenAPI"], repo="https://github.com/soljinkim13/ev-charge-trip"),
