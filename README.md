@@ -4,31 +4,60 @@
 
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/section-projects-dark.svg"><img src="./assets/section-projects-light.svg" width="100%" alt="프로젝트 대표 여섯 가지"></picture></p>
 
-<h3>01&nbsp; KKIRI&nbsp; <sub>차량 여러 대를 하나로 묶는 실시간 소통 앱</sub></h3>
-<p><b>백엔드 전담</b> · 5인 팀 · 팀장 · 2026.10 – 11&nbsp;&nbsp;｜&nbsp;&nbsp;<img src="./assets/icons/typescript.svg" height="14" alt=""> TypeScript&nbsp; <img src="./assets/icons/nodedotjs.svg" height="14" alt=""> Node.js&nbsp; WebSocket&nbsp; REST API<br>
-결과 &nbsp;세션 상태를 <b>4단계</b>로 나눠 통신이 끊겨도 같은 무리로 복귀&nbsp;&nbsp; <a href="https://github.com/OKKIKKI/KKIRI"><img src="./assets/btn-repo.svg" height="22" alt="KKIRI 저장소"></a></p>
-
-<h3>02&nbsp; 헬스 루틴 편집실&nbsp; <sub>조건과 근거로 답하는 운동 RAG 서비스</sub></h3>
-<p><b>1인 개발</b> · 개인 프로젝트 · 2026.10&nbsp;&nbsp;｜&nbsp;&nbsp;<img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; <img src="./assets/icons/fastapi.svg" height="14" alt=""> FastAPI&nbsp; <img src="./assets/icons/react.svg" height="14" alt=""> React&nbsp; <img src="./assets/icons/langchain.svg" height="14" alt=""> LangGraph&nbsp; ChromaDB<br>
-결과 &nbsp;같은 질문의 응답 시간 <b>80% 단축</b> · 17.6초 → 3.6초&nbsp;&nbsp; <a href="https://github.com/soljinkim13/health-routine-studio"><img src="./assets/btn-repo.svg" height="22" alt="헬스 루틴 편집실 저장소"></a></p>
-
-<h3>03&nbsp; LocalHub&nbsp; <sub>로그인 없이 쓰는 광주·전라 여행 정보 서비스</sub></h3>
-<p><b>백엔드</b> · 3인 팀 · 2026.07&nbsp;&nbsp;｜&nbsp;&nbsp;<img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; <img src="./assets/icons/fastapi.svg" height="14" alt=""> FastAPI&nbsp; <img src="./assets/icons/sqlite.svg" height="14" alt=""> SQLite&nbsp; <img src="./assets/icons/openai.svg" height="14" alt=""> OpenAI&nbsp; <img src="./assets/icons/vuedotjs.svg" height="14" alt=""> Vue<br>
-결과 &nbsp;장소 검색 · 리뷰 · 여행 챗봇 API를 <b>3일</b> 만에 구현&nbsp;&nbsp; <a href="https://github.com/soljinkim13/localhub"><img src="./assets/btn-repo.svg" height="22" alt="LocalHub 저장소"></a> <a href="https://gwangju-jeolla-nice.netlify.app/"><img src="./assets/btn-demo.svg" height="22" alt="LocalHub 데모"></a></p>
-
-<h3>04&nbsp; 빌려가요&nbsp; <sub>공공 대여 방문안을 짜 주는 에이전트</sub></h3>
-<p><b>1인 개발</b> · 개인 프로젝트 · 2026.11&nbsp;&nbsp;｜&nbsp;&nbsp;<img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; <img src="./assets/icons/fastapi.svg" height="14" alt=""> FastAPI&nbsp; <img src="./assets/icons/langchain.svg" height="14" alt=""> LangGraph&nbsp; <img src="./assets/icons/sqlite.svg" height="14" alt=""> SQLite&nbsp; <img src="./assets/icons/kakao.svg" height="14" alt=""> Kakao<br>
-결과 &nbsp;서초구 대여처 <b>18곳</b>을 조건으로 탐색, 품절이면 다시 탐색&nbsp;&nbsp; <a href="https://github.com/soljinkim13/borrow-planner"><img src="./assets/btn-repo.svg" height="22" alt="빌려가요 저장소"></a></p>
-
-<h3>05&nbsp; KIC AI Agent&nbsp; <sub>위기 다음 날의 투자 판단을 돕는 에이전트 기획</sub></h3>
-<p><b>조사와 기획</b> · 4인 팀 · 2026.10 – 11&nbsp;&nbsp;｜&nbsp;&nbsp;사례 조사&nbsp; 위기 사건 선정&nbsp; 기획서<br>
-결과 &nbsp;공식 문서로 시점을 확인한 위기 사건 <b>12건</b> 선정&nbsp;&nbsp; </p>
-
-<h3>06&nbsp; 업무 자동화&nbsp; <sub>세미나 영상 더빙과 3D 데이터 가공 자동화</sub></h3>
-<p><b>1인 개발</b> · 실무 · 연구소 · 2024.11 – 2025.07&nbsp;&nbsp;｜&nbsp;&nbsp;<img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; Whisper&nbsp; <img src="./assets/icons/elevenlabs.svg" height="14" alt=""> ElevenLabs&nbsp; <img src="./assets/icons/ffmpeg.svg" height="14" alt=""> FFmpeg&nbsp; <img src="./assets/icons/rhinoceros.svg" height="14" alt=""> Rhino<br>
-결과 &nbsp;약 일주일 걸리던 더빙을 <b>약 10분</b>으로&nbsp;&nbsp; </p>
-
-<br>
+<table>
+<tr>
+<td width="50%" valign="top">
+<h3>01&nbsp; KKIRI</h3>
+차량 여러 대를 하나로 묶는 실시간 소통 앱<br><br>
+<b>백엔드 전담</b> · 5인 팀 · 팀장 · 2026.10 – 11<br>
+<img src="./assets/icons/typescript.svg" height="14" alt=""> TypeScript&nbsp; <img src="./assets/icons/nodedotjs.svg" height="14" alt=""> Node.js&nbsp; WebSocket&nbsp; REST API<br>
+결과 &nbsp;세션 상태를 <b>4단계</b>로 나눠 통신이 끊겨도 같은 무리로 복귀<br><br>
+<a href="https://github.com/OKKIKKI/KKIRI"><img src="./assets/btn-repo.svg" height="22" alt="KKIRI 저장소"></a>
+</td>
+<td width="50%" valign="top">
+<h3>02&nbsp; 헬스 루틴 편집실</h3>
+조건과 근거로 답하는 운동 RAG 서비스<br><br>
+<b>1인 개발</b> · 개인 프로젝트 · 2026.10<br>
+<img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; <img src="./assets/icons/fastapi.svg" height="14" alt=""> FastAPI&nbsp; <img src="./assets/icons/react.svg" height="14" alt=""> React&nbsp; <img src="./assets/icons/langchain.svg" height="14" alt=""> LangGraph&nbsp; ChromaDB<br>
+결과 &nbsp;같은 질문의 응답 시간 <b>80% 단축</b> · 17.6초 → 3.6초<br><br>
+<a href="https://github.com/soljinkim13/health-routine-studio"><img src="./assets/btn-repo.svg" height="22" alt="헬스 루틴 편집실 저장소"></a>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<h3>03&nbsp; LocalHub</h3>
+로그인 없이 쓰는 광주·전라 여행 정보 서비스<br><br>
+<b>백엔드</b> · 3인 팀 · 2026.07<br>
+<img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; <img src="./assets/icons/fastapi.svg" height="14" alt=""> FastAPI&nbsp; <img src="./assets/icons/sqlite.svg" height="14" alt=""> SQLite&nbsp; <img src="./assets/icons/openai.svg" height="14" alt=""> OpenAI&nbsp; <img src="./assets/icons/vuedotjs.svg" height="14" alt=""> Vue<br>
+결과 &nbsp;장소 검색 · 리뷰 · 여행 챗봇 API를 <b>3일</b> 만에 구현<br><br>
+<a href="https://github.com/soljinkim13/localhub"><img src="./assets/btn-repo.svg" height="22" alt="LocalHub 저장소"></a> <a href="https://gwangju-jeolla-nice.netlify.app/"><img src="./assets/btn-demo.svg" height="22" alt="LocalHub 데모"></a>
+</td>
+<td width="50%" valign="top">
+<h3>04&nbsp; 빌려가요</h3>
+공공 대여 방문안을 짜 주는 에이전트<br><br>
+<b>1인 개발</b> · 개인 프로젝트 · 2026.11<br>
+<img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; <img src="./assets/icons/fastapi.svg" height="14" alt=""> FastAPI&nbsp; <img src="./assets/icons/langchain.svg" height="14" alt=""> LangGraph&nbsp; <img src="./assets/icons/sqlite.svg" height="14" alt=""> SQLite&nbsp; <img src="./assets/icons/kakao.svg" height="14" alt=""> Kakao<br>
+결과 &nbsp;서초구 대여처 <b>18곳</b>을 조건으로 탐색, 품절이면 다시 탐색<br><br>
+<a href="https://github.com/soljinkim13/borrow-planner"><img src="./assets/btn-repo.svg" height="22" alt="빌려가요 저장소"></a>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<h3>05&nbsp; KIC AI Agent</h3>
+위기 다음 날의 투자 판단을 돕는 에이전트 기획<br><br>
+<b>조사와 기획</b> · 4인 팀 · 2026.10 – 11<br>
+사례 조사&nbsp; 위기 사건 선정&nbsp; 기획서<br>
+결과 &nbsp;공식 문서로 시점을 확인한 위기 사건 <b>12건</b> 선정
+</td>
+<td width="50%" valign="top">
+<h3>06&nbsp; 업무 자동화</h3>
+세미나 영상 더빙과 3D 데이터 가공 자동화<br><br>
+<b>1인 개발</b> · 실무 · 연구소 · 2024.11 – 2025.07<br>
+<img src="./assets/icons/python.svg" height="14" alt=""> Python&nbsp; Whisper&nbsp; <img src="./assets/icons/elevenlabs.svg" height="14" alt=""> ElevenLabs&nbsp; <img src="./assets/icons/ffmpeg.svg" height="14" alt=""> FFmpeg&nbsp; <img src="./assets/icons/rhinoceros.svg" height="14" alt=""> Rhino<br>
+결과 &nbsp;약 일주일 걸리던 더빙을 <b>약 10분</b>으로
+</td>
+</tr>
+</table>
 
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/section-more-dark.svg"><img src="./assets/section-more-light.svg" width="100%" alt="그 밖의 프로젝트 만들어 본 열 가지"></picture></p>
 

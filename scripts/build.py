@@ -336,10 +336,25 @@ def _buttons(p, h=20):
 
 
 def _featured(i, p):
+    """표 한 칸: 제목, 설명, 담당, 기술, 결과, 버튼."""
     pre, em, post = p["result"]
-    return (f'<h3>{i:02d}&nbsp; {p["name"]}&nbsp; <sub>{p["desc"]}</sub></h3>\n'
-            f'<p><b>{p["role"]}</b> · {p["team"]} · {p["period"]}&nbsp;&nbsp;｜&nbsp;&nbsp;{_techs(p["tech"])}<br>\n'
-            f'결과 &nbsp;{pre}<b>{em}</b>{post}&nbsp;&nbsp; {_buttons(p, 22)}</p>')
+    btn = _buttons(p, 22)
+    return (f'<td width="50%" valign="top">\n'
+            f'<h3>{i:02d}&nbsp; {p["name"]}</h3>\n'
+            f'{p["desc"]}<br><br>\n'
+            f'<b>{p["role"]}</b> · {p["team"]} · {p["period"]}<br>\n'
+            f'{_techs(p["tech"])}<br>\n'
+            f'결과 &nbsp;{pre}<b>{em}</b>{post}'
+            + (f'<br><br>\n{btn}\n' if btn else '\n')
+            + '</td>')
+
+
+def _featured_table():
+    rows = []
+    items = list(enumerate(D.FEATURED, 1))
+    for k in range(0, len(items), 2):
+        rows.append("<tr>\n" + "\n".join(_featured(i, p) for i, p in items[k:k + 2]) + "\n</tr>")
+    return "<table>\n" + "\n".join(rows) + "\n</table>"
 
 
 def _more(i, p):
@@ -355,9 +370,7 @@ def readme():
         "",
         _sec("projects"),
         "",
-        "\n\n".join(_featured(i, p) for i, p in enumerate(D.FEATURED, 1)),
-        "",
-        "<br>",
+        _featured_table(),
         "",
         _sec("more"),
         "",
