@@ -31,35 +31,36 @@ LINKS = [
 ]
 
 # 대표 프로젝트. result: (앞, 강조, 뒤)
+# 카드 윗부분 그림: shot="파일명" (scripts/shots/ 안의 화면 캡처) 또는 art="kkiri|kic|automation" (직접 그린 도식)
 FEATURED = [
     dict(name="KKIRI", desc="차량 여러 대를 하나로 묶는 실시간 소통 앱", period="2026.10 – 11",
          role="백엔드 전담", team="5인 팀 · 팀장",
          tech=["typescript", "nodedotjs:Node.js", "=WebSocket", "=REST API"],
          result=("세션 상태를 ", "4단계", "로 나눠 통신이 끊겨도 같은 무리로 복귀"),
-         repo="https://github.com/OKKIKKI/KKIRI"),
+         repo="https://github.com/OKKIKKI/KKIRI", art="kkiri"),
     dict(name="헬스 루틴 편집실", desc="조건과 근거로 답하는 운동 RAG 서비스", period="2026.10",
          role="1인 개발", team="개인 프로젝트",
          tech=["python", "fastapi", "react", "langchain:LangGraph", "=ChromaDB"],
          result=("같은 질문의 응답 시간 ", "80% 단축", " · 17.6초 → 3.6초"),
-         repo="https://github.com/soljinkim13/health-routine-studio"),
+         repo="https://github.com/soljinkim13/health-routine-studio", shot="project-2.jpg"),
     dict(name="LocalHub", desc="로그인 없이 쓰는 광주·전라 여행 정보 서비스", period="2026.07",
          role="백엔드", team="3인 팀",
          tech=["python", "fastapi", "sqlite", "openai", "vuedotjs:Vue"],
          result=("장소 검색 · 리뷰 · 여행 챗봇 API를 ", "3일", " 만에 구현"),
-         repo="https://github.com/soljinkim13/localhub", demo="https://gwangju-jeolla-nice.netlify.app/"),
+         repo="https://github.com/soljinkim13/localhub", demo="https://gwangju-jeolla-nice.netlify.app/", shot="project-3.jpg"),
     dict(name="빌려가요", desc="공공 대여 방문안을 짜 주는 에이전트", period="2026.11",
          role="1인 개발", team="개인 프로젝트",
          tech=["python", "fastapi", "langchain:LangGraph", "sqlite", "kakao"],
          result=("서초구 대여처 ", "18곳", "을 조건으로 탐색, 품절이면 다시 탐색"),
-         repo="https://github.com/soljinkim13/borrow-planner"),
+         repo="https://github.com/soljinkim13/borrow-planner", shot="project-4.jpg"),
     dict(name="KIC AI Agent", desc="위기 다음 날의 투자 판단을 돕는 에이전트 기획", period="2026.10 – 11",
          role="조사와 기획", team="4인 팀",
          tech=["=사례 조사", "=위기 사건 선정", "=기획서"],
-         result=("공식 문서로 시점을 확인한 위기 사건 ", "12건", " 선정")),
+         result=("공식 문서로 시점을 확인한 위기 사건 ", "12건", " 선정"), art="kic"),
     dict(name="업무 자동화", desc="세미나 영상 더빙과 3D 데이터 가공 자동화", period="2024.11 – 2025.07",
          role="1인 개발", team="실무 · 연구소",
          tech=["python", "=Whisper", "elevenlabs", "ffmpeg", "rhinoceros:Rhino"],
-         result=("약 일주일 걸리던 더빙을 ", "약 10분", "으로"), orange=True),
+         result=("약 일주일 걸리던 더빙을 ", "약 10분", "으로"), orange=True, art="automation"),
 ]
 
 # 그 밖의 프로젝트 (3단 요약. 기술은 앞의 3개만 보인다)

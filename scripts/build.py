@@ -254,35 +254,93 @@ def stack(T):
 
 # ---------------------------------------------------------------- 대표 프로젝트 카드 (P1)
 CW, CH = 480, 236
+IMG = 168  # 카드 윗부분 그림 높이
 GAP = 18  # 카드 아래 투명 여백 (GitHub README는 CSS를 못 써서 그림 안에 간격을 둔다)
+
+
+def _shot(file):
+    import base64
+    b = base64.b64encode(open(os.path.join(HERE, "shots", file), "rb").read()).decode()
+    return (f'<image href="data:image/jpeg;base64,{b}" x="1" y="1" width="{CW - 2}" height="{IMG}" '
+            f'preserveAspectRatio="xMidYMin slice" clip-path="url(#top)"/>')
+
+
+def _art(kind, T):
+    """화면 캡처가 없는 프로젝트를 위한 작은 도식."""
+    o = [f'<rect x="1" y="1" width="{CW - 2}" height="{IMG}" fill="{T["g0"]}" clip-path="url(#top)"/>']
+    if kind == "kkiri":  # 차량 네 대가 한 세션에 묶이고, 상태가 4단계로 넘어간다
+        cx, cy = 150, 86
+        cars = [(60, 40), (60, 132), (240, 40), (240, 132)]
+        for i, (x, y) in enumerate(cars):
+            o.append(f'<line x1="{cx}" y1="{cy}" x2="{x}" y2="{y}" stroke="{T["g2"]}" stroke-width="2" stroke-dasharray="4 5">'
+                     f'<animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite"/></line>')
+            o.append(f'<rect x="{x - 22}" y="{y - 13}" width="44" height="26" rx="8" fill="{T["paper"]}" stroke="{T["g3"]}"/>')
+            o.append(label(f"CAR{i + 1}", x, y + 4, T, 10, T["g4"], "middle"))
+        o.append(f'<circle cx="{cx}" cy="{cy}" r="22" fill="{T["g3"]}"/>')
+        o.append(text("무리", cx, cy + 5, "b", 13, T["paper"], "middle")[0])
+        states = ["연결", "흔들림", "재접속", "복귀"]
+        for i, st in enumerate(states):
+            y = 38 + i * 32
+            on = i == 3
+            o.append(f'<rect x="312" y="{y - 14}" width="140" height="24" rx="6" fill="{T["hl"] if on else T["paper"]}" stroke="{T["g3"] if on else T["line"]}"/>')
+            o.append(label(f"0{i + 1}", 324, y + 2, T, 10))
+            o.append(text(st, 350, y + 3, "b" if on else "r", 12, T["g3"] if on else T["ink"])[0])
+    elif kind == "kic":  # 위기 사건 12건을 시간축에 찍는다
+        o.append(f'<line x1="30" y1="96" x2="{CW - 30}" y2="96" stroke="{T["g2"]}" stroke-width="2"/>')
+        import random
+        random.seed(5)
+        xs = sorted(random.sample(range(40, CW - 40), 12))
+        for i, x in enumerate(xs):
+            h = random.randint(18, 56)
+            c = T["clay"] if i in (3, 8) else T["g3"]
+            o.append(f'<line x1="{x}" y1="96" x2="{x}" y2="{96 - h}" stroke="{c}" stroke-width="2"/>'
+                     f'<circle class="up" style="animation-delay:{i * .08:.2f}s" cx="{x}" cy="{96 - h}" r="5" fill="{c}"/>')
+        o.append(label("CRISIS EVENTS · 12", 30, 136, T, 11))
+        o.append(label("D+1 →", CW - 30, 136, T, 11, anchor="end"))
+    elif kind == "automation":  # 음성 파형 → 자동 더빙: 일주일이 10분으로
+        import math
+        pts = " ".join(f"{30 + i * 4},{84 + math.sin(i * .55) * (8 + (i * 7) % 22)}" for i in range(48))
+        o.append(f'<polyline points="{pts}" fill="none" stroke="{T["g3"]}" stroke-width="2"/>')
+        o.append(f'<path d="M232 84 h28 m-8 -7 l8 7 l-8 7" stroke="{T["ink"]}" stroke-width="2" fill="none"/>')
+        for i in range(5):
+            o.append(f'<rect class="up" style="animation-delay:{i * .12:.2f}s" x="{276 + i * 36}" y="{70 - (i % 2) * 8}" width="28" height="{28 + (i % 2) * 16}" rx="5" fill="{[T["g2"], T["g3"], T["g4"], T["g3"], T["clay"]][i]}"/>')
+        o.append(label("1 WEEK", 30, 140, T, 11))
+        o.append(label("→ 10 MIN", 276, 140, T, 11, T["clay"]))
+    return "".join(o)
 
 
 def card(p, T):
     inner = CW - 56
+    H = IMG + CH
     meta = f'{p["period"]} · {p["role"]}'
-    o = [f'<rect x="1" y="1" width="{CW - 2}" height="{CH - 2}" rx="14" fill="{T["paper"]}" stroke="{T["line"]}"/>',
-         f'<circle cx="32" cy="38" r="4" fill="{T["clay"] if p.get("orange") else T["g3"]}"/>',
-         label(meta, 44, 42, T, 12)]
+    o = [f'<defs><clipPath id="top"><path d="M1 15 a14 14 0 0 1 14 -14 H{CW - 15} a14 14 0 0 1 14 14 V{IMG + 1} H1 Z"/></clipPath></defs>',
+         f'<rect x="1" y="1" width="{CW - 2}" height="{H - 2}" rx="14" fill="{T["paper"]}"/>']
+    o.append(_shot(p["shot"]) if p.get("shot") else _art(p.get("art", ""), T))
+    o.append(f'<line x1="1" y1="{IMG + 1}" x2="{CW - 1}" y2="{IMG + 1}" stroke="{T["line"]}"/>')
+    o.append(f'<rect x="1" y="1" width="{CW - 2}" height="{H - 2}" rx="14" fill="none" stroke="{T["line"]}"/>')
+    y0 = IMG
+    o.append(f'<circle cx="32" cy="{y0 + 38}" r="4" fill="{T["clay"] if p.get("orange") else T["g3"]}"/>')
+    o.append(label(meta, 44, y0 + 42, T, 12))
     if p.get("repo"):
-        o.append(text("↗", CW - 30, 44, "r", 18, T["mute"], "end")[0])
-    nm = text(p["name"], 28, 94, "b", 26, T["ink"], ls=-.4)[0]
-    desc = text(p["desc"], 28, 124, "r", 15, T["mute"])[0]
+        o.append(text("↗", CW - 30, y0 + 44, "r", 18, T["mute"], "end")[0])
+    nm = text(p["name"], 28, y0 + 94, "b", 26, T["ink"], ls=-.4)[0]
+    desc = text(p["desc"], 28, y0 + 124, "r", 15, T["mute"])[0]
     size = 14
     while width("".join(p["result"]), "r", size) > inner and size > 11:
         size -= .5
-    res, _ = emph(28, 160, p["result"], T, size, p.get("orange"))
+    res, _ = emph(28, y0 + 160, p["result"], T, size, p.get("orange"))
     o.append(up(nm + desc + res, .1))
-    o.append(label(p["team"], 28, 190, T, 12))
+    o.append(label(p["team"], 28, y0 + 190, T, 12))
     x = 28
     for t in p["tech"]:
         slug, name = parse_tech(t)
         if slug:
-            o.append(icon(slug, x, 202, 13, T["g3"]))
+            o.append(icon(slug, x, y0 + 202, 13, T["g3"]))
             x += 18
-        s, w = text(name, x, 213, "m", 12, T["g3"])
+        s, w = text(name, x, y0 + 213, "m", 12, T["g3"])
         o.append(s)
         x += w + 14
-    return svg(CW, CH + GAP, "".join(o), f'{p["name"]} · {p["desc"]}')
+    return svg(CW, H + GAP, "".join(o), f'{p["name"]} · {p["desc"]}')
 
 
 # ---------------------------------------------------------------- 그 밖의 프로젝트 (D1, 3단 요약)
