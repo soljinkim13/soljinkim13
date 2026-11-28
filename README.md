@@ -1,6 +1,6 @@
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/hero-dark.svg"><img src="./assets/hero-light.svg" width="100%" alt="Jinsol Kim 김진솔 · Backend Developer · 다양한 현장을 거쳐, 문제를 넓게 보는 개발자"></picture>
 
-**Email** [soljinkim13@gmail.com](mailto:soljinkim13@gmail.com)　**Velog** [velog.io/@tongmill_g](https://velog.io/@tongmill_g/posts)
+<code>EMAIL</code>&nbsp; <a href="mailto:soljinkim13@gmail.com">soljinkim13@gmail.com</a>&nbsp;&nbsp;·&nbsp;&nbsp;<code>VELOG</code>&nbsp; <a href="https://velog.io/@tongmill_g/posts">velog.io/@tongmill_g</a>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/about-dark.svg"><img src="./assets/about-light.svg" width="100%" alt="소개 · 소프트웨어공학을 전공하고 통역, 영상, 3D 현장을 거쳤습니다. 반복 업무를 자동화하며 서버와 데이터 흐름에 빠졌습니다. 끊겨도 복구되는 실시간 세션, 3.6초로 줄인 RAG 응답처럼 안정적이고 빠른 백엔드를 설계하고 만듭니다."></picture>
 

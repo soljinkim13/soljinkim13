@@ -349,7 +349,7 @@ def readme():
     L = [
         _pic("hero", f"{D.NAME_EN} {D.NAME} · {D.ROLE} · {''.join(D.HOOK)}"),
         "",
-        "　".join(f'**{n}** [{t}]({u})' for n, t, u in D.LINKS),
+        "&nbsp;&nbsp;·&nbsp;&nbsp;".join(f'<code>{n.upper()}</code>&nbsp; <a href="{u}">{t}</a>' for n, t, u in D.LINKS),
         "",
         _pic("about", "소개 · " + " ".join(D.ABOUT)),
         "",
