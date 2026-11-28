@@ -3,10 +3,19 @@
 # tech 항목: simple-icons 슬러그(scripts/icons.json에 있는 것), "슬러그:보일 이름", 아이콘 없이 글자만 쓰려면 "=이름".
 
 NAME = "김진솔"
+NAME_EN = "Jinsol Kim"  # 표지의 큰 이름 (Bricolage Grotesque)
 ROLE = "Backend Developer"
-HOOK = ("다양한 현장을 거쳐,", "문제를 넓게 보는", " 개발자")  # 두 번째 조각이 강조색
+HOOK = ("다양한 현장을 거쳐, ", "문제를 넓게 보는", " 개발자")  # 두 번째 조각이 강조색
+HERO_STACK = ["Java", "Spring", "Python", "FastAPI", "LangGraph"]  # 표지 아래 한 줄
 
-# 표지 오른쪽 커밋 기록: (해시, 내용, 점 색: gray / orange / green)
+# 소개 왼쪽 문단 (한 줄씩)
+ABOUT = [
+    "소프트웨어공학을 전공하고 통역, 영상, 3D 데이터 현장에서",
+    "일하며 반복되는 일을 도구로 바꿔 왔어요.",
+    "지금은 SSAFY 16기에서 백엔드와 AI 에이전트를 만들어요.",
+]
+
+# 소개 오른쪽 커밋 기록: (해시, 내용, 점 색: gray / orange / green). 마지막 줄이 지금.
 LOG = [
     ("a1f3c2e", "init: 소프트웨어공학 전공", "gray"),
     ("7d2b9e1", "feat: 통역 · 영상 · 3D 실무", "gray"),
@@ -14,23 +23,11 @@ LOG = [
     ("e91f5d3", "feat: 백엔드 · SSAFY 16기", "green"),
 ]
 
-# 표지 오른쪽 그래프: main에서 갈라졌다 다시 합쳐지는 갈래
-BRANCHES = ["소프트웨어공학", "통역 · 번역", "영상 편집", "3D 데이터"]
-
-# 표지 아래 연락처: (이름, 보이는 글자, 주소)
+# 표지 바로 아래 연락처: (이름, 보이는 글자, 주소)
 LINKS = [
     ("Email", "soljinkim13@gmail.com", "mailto:soljinkim13@gmail.com"),
     ("Velog", "velog.io/@tongmill_g", "https://velog.io/@tongmill_g/posts"),
 ]
-
-# 구역 제목: (이름표, 제목)
-SECTIONS = {
-    "projects": ("프로젝트", "대표 여섯 가지"),
-    "more": ("그 밖의 프로젝트", "만들어 본 열 가지"),
-    "stack": ("기술 스택", "프로젝트에서 직접 쓴 기술"),
-    "activity": ("기록과 활동", "배운 것을 글과 발표로"),
-    "grass": ("커밋 기록", "최근 1년"),
-}
 
 # 대표 프로젝트. result: (앞, 강조, 뒤)
 FEATURED = [
@@ -64,7 +61,7 @@ FEATURED = [
          result=("약 일주일 걸리던 더빙을 ", "약 10분", "으로"), orange=True),
 ]
 
-# 그 밖의 프로젝트 (한 줄 목록)
+# 그 밖의 프로젝트 (3단 요약. 기술은 앞의 3개만 보인다)
 MORE = [
     dict(name="폰스토리 메이커", desc="폰 스토리 편집기", team="개인", tech=["javascript", "html5", "=IndexedDB", "vercel"], repo="https://github.com/soljinkim13/phone-maker"),
     dict(name="틈 TEUM", desc="여행 일정 추천", team="SSAFY 관통", tech=["openjdk:Java", "spring", "=MyBatis", "mysql"], repo="https://github.com/soljinkim13/teum-enjoytrip"),
@@ -78,6 +75,7 @@ MORE = [
     dict(name="Pelican", desc="영상 제작 자동화", team="개인", tech=["python", "ffmpeg", "=Remotion"], repo="https://github.com/soljinkim13/auto-pelican"),
 ]
 
+# 기술 스택 (흐르는 띠에 이 순서대로 나온다)
 STACK = [
     ("언어", ["openjdk:Java", "python", "typescript", "javascript", "kotlin"]),
     ("서버", ["spring", "fastapi", "nodedotjs:Node.js", "=WebSocket", "=MyBatis"]),
@@ -87,11 +85,18 @@ STACK = [
     ("도구", ["git", "github", "ffmpeg", "vercel"]),
 ]
 
-# (Feather 아이콘, 앞, 강조)
+# 기록: (Feather 아이콘, 앞, 강조)
 ACTIVITY = [
     ("pen-tool", "Velog 기술 글 ", "23편"),
     ("code", "알고리즘 풀이 ", "167커밋"),
     ("message-square", "스터디 발표 ", "3회"),
     ("users", "JavaScript 스터디 ", "리더"),
 ]
-CERTS = ["정보처리기사 필기", "ADsP", "OPIc IH", "HSK 6급", "SSAFY 역량테스트 A형"]
+# 자격: (이름, 발급처). 첫 줄은 클레이색 점
+CERTS = [
+    ("SSAFY 역량테스트 A형", "SSAFY"),
+    ("정보처리기사 필기", "한국산업인력공단"),
+    ("ADsP", "한국데이터산업진흥원"),
+    ("OPIc IH", "ACTFL"),
+    ("HSK 6급", "HSK"),
+]
