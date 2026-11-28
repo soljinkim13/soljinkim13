@@ -214,9 +214,9 @@ def about(T):
     o = [section_title("ABOUT", T)]
     left = "".join(text(l, 24, 78 + i * 28, "r", 17, T["ink"])[0] for i, l in enumerate(D.ABOUT))
     o.append(up(left, .1))
-    for i, (h, msg, c) in enumerate(D.LOG):
+    for i, (h, msg, c) in enumerate(reversed(D.LOG)):  # 최신 커밋이 맨 위
         y = 64 + i * 42
-        last = i == len(D.LOG) - 1
+        last = i == 0
         row = (f'<line x1="560" y1="{y - 26}" x2="976" y2="{y - 26}" stroke="{T["line"]}"/>'
                + f'<circle {"class=\"pulse\" " if last else ""}cx="566" cy="{y - 5}" r="4" fill="{T[DOT[c]]}"/>'
                + label(h, 580, y, T, 12)
@@ -254,6 +254,7 @@ def stack(T):
 
 # ---------------------------------------------------------------- 대표 프로젝트 카드 (P1)
 CW, CH = 480, 236
+GAP = 18  # 카드 아래 투명 여백 (GitHub README는 CSS를 못 써서 그림 안에 간격을 둔다)
 
 
 def card(p, T):
@@ -281,7 +282,7 @@ def card(p, T):
         s, w = text(name, x, 213, "m", 12, T["g3"])
         o.append(s)
         x += w + 14
-    return svg(CW, CH, "".join(o), f'{p["name"]} · {p["desc"]}')
+    return svg(CW, CH + GAP, "".join(o), f'{p["name"]} · {p["desc"]}')
 
 
 # ---------------------------------------------------------------- 그 밖의 프로젝트 (D1, 3단 요약)

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="236" viewBox="0 0 480 236" role="img" aria-label="KKIRI · 차량 여러 대를 하나로 묶는 실시간 소통 앱"><title>KKIRI · 차량 여러 대를 하나로 묶는 실시간 소통 앱</title><style>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="254" viewBox="0 0 480 254" role="img" aria-label="KKIRI · 차량 여러 대를 하나로 묶는 실시간 소통 앱"><title>KKIRI · 차량 여러 대를 하나로 묶는 실시간 소통 앱</title><style>
 .up{opacity:0;animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .pulse{animation:pulse 2.4s ease-in-out infinite}

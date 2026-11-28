@@ -2,7 +2,7 @@
 
 **Email** [soljinkim13@gmail.com](mailto:soljinkim13@gmail.com)　**Velog** [velog.io/@tongmill_g](https://velog.io/@tongmill_g/posts)
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/about-dark.svg"><img src="./assets/about-light.svg" width="100%" alt="소개 · 소프트웨어공학을 전공하고 통역, 영상, 3D 데이터 현장에서 일하며 반복되는 일을 도구로 바꿔 왔어요. 지금은 SSAFY 16기에서 백엔드와 AI 에이전트를 만들어요."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/about-dark.svg"><img src="./assets/about-light.svg" width="100%" alt="소개 · 소프트웨어공학을 전공하고 통역, 영상, 3D 현장을 거쳤습니다. 반복 업무를 자동화하며 서버와 데이터 흐름에 빠졌습니다. 끊겨도 복구되는 실시간 세션, 3.6초로 줄인 RAG 응답처럼 안정적이고 빠른 백엔드를 설계하고 만듭니다."></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="./assets/stack-dark.svg"><img src="./assets/stack-light.svg" width="100%" alt="기술 스택"></picture>
 
